@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from uuid import UUID
 
 
@@ -15,3 +15,5 @@ class User(BaseModel):
     email: str
     about: str
     user_type: UserTypes
+
+
