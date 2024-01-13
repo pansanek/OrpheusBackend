@@ -7,6 +7,12 @@ class Post(BaseModel):
     post_id: UUID
     user_id: UUID
     caption: str
-    image: str  # Assuming the image is stored as a URL or file path
+    image: str
     timestamp: datetime
     likes: List[UUID]
+
+
+class CreatePostRequest(BaseModel):
+    user_id: UUID
+    caption: str
+    image: str
