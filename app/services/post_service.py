@@ -21,5 +21,5 @@ class PostService:
         return self.post_repo.get_post_by_id(post_id)
 
     def create_post(self, user_id: UUID, caption: str, image: str) -> Post:
-        post = Post(post_id=uuid4(), user_id=user_id, caption=caption, image=image, timestamp=datetime.utcnow(), likes=[])
+        post = Post(post_id=uuid4(), user_id=user_id, caption=caption, image=image, timestamp=datetime.utcnow(), likes=[],comments=[],attachment=[])
         return self.post_repo.create_post(post)
