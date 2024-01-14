@@ -4,10 +4,12 @@ from uuid import UUID
 from pydantic import BaseModel
 from datetime import datetime
 
+from app.models.photo_url_model import PhotoUrl
+
 
 class UserTypes(str, Enum):
-    Musician = "Musician"
-    Administrator = "Administrator"
+    MUSICIAN = "Musician"
+    ADMINISTRATOR = "Administrator"
 
 
 class User(BaseModel):
@@ -17,6 +19,8 @@ class User(BaseModel):
     email: str
     about: str
     user_type: UserTypes
+    profile_picture: PhotoUrl
+    background_picture: PhotoUrl
 
 class CreateUserRequest(BaseModel):
     login: str
