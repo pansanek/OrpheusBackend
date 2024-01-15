@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     amqp_url: str = os.getenv("AMQP_URL")
     print(f"\n\n AMQP_URL: {amqp_url}\n\n")
 
-    postgres_url: str = os.getenv("POSTGRES_URL_POST")
+    postgres_url: str = os.getenv("POSTGRES_URL_ADMINISTRATOR")
     print(f"\n\n POSTGRES_URL: {postgres_url}\n\n")
 
     host_ip: str = os.getenv("HOST_IP")
