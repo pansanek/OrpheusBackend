@@ -19,8 +19,8 @@ class UserService:
     def get_user_by_id(self, user_id: UUID) -> User:
         return self.user_repo.get_user_by_id(user_id)
 
-    def create_user(self, login: str, password: str, email: str, about: str, user_type: str,profile_picture: PhotoUrl, background_picture: PhotoUrl) -> User:
-        user = User(id=uuid4(), login=login, password=password, email=email, about=about, user_type=user_type,profile_picture=profile_picture,background_picture=background_picture)
+    def create_user(self, login: str, password: str, email: str, about: str, user_type: str) -> User:
+        user = User(id=uuid4(), login=login, password=password, email=email, about=about, user_type=user_type, profile_picture={},background_picture={})
         return self.user_repo.create_user(user)
 
 

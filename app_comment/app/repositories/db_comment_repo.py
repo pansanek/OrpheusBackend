@@ -47,3 +47,15 @@ class CommentRepo:
         if comment is None:
             raise KeyError(f"Comment with id {comment_id} not found.")
         return self._map_to_model(comment)
+
+    def get_comments_by_post_id(self, post_id: UUID) -> List[Comment]:
+        comments = self.db \
+            .query(DBComment) \
+            .filter(DBComment.post_id == post_id) \
+            .all()
+
+        if not comments:
+            # Возвращаем пустой список, если нет комментариев для указанного поста
+            return []
+
+        return [self._map_to_model(comment) for comment in comments]

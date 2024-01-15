@@ -20,6 +20,6 @@ class PostService:
     def get_post_by_id(self, post_id: UUID) -> Post:
         return self.post_repo.get_post_by_id(post_id)
 
-    def create_post(self, user_id: UUID, caption: str, image: str, creator_type: CreatorTypes) -> Post:
-        post = Post(post_id=uuid4(), creator_id=user_id, caption=caption, image=image, timestamp=datetime.utcnow(), likes=[],comments=[],attachment=[],creator_type=creator_type,views=0)
+    def create_post(self, creator_id: UUID, caption: str, creator_type: str) -> Post:
+        post = Post(post_id=uuid4(), creator_id=creator_id, caption=caption, timestamp=datetime.utcnow(), likes=[],comments=[],attachment=[],creator_type=creator_type,views=0)
         return self.post_repo.create_post(post)
