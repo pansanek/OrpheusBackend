@@ -1,10 +1,10 @@
 from typing import List
 from uuid import UUID, uuid4
+
 from fastapi import Depends
 
 from app_band.app.models.band_model import Band
 from app_band.app.models.genre_types import GenreTypes
-from app_band.app.models.photo_url_model import PhotoUrl
 from app_band.app.repositories.db_band_repo import BandRepo
 
 

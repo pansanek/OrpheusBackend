@@ -1,11 +1,13 @@
 import traceback
 from typing import List
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
 from app_user.app.database import get_db
 from app_user.app.models.user_model import User
 from app_user.app.schemas.user_schema import User as DBUser
+
 
 class UserRepo:
     db: Session

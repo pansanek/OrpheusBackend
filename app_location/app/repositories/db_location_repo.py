@@ -1,11 +1,13 @@
 import traceback
 from typing import List
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
 from app_location.app.database import get_db
 from app_location.app.models.location_model import Location
 from app_location.app.schemas.location_schema import Location as DBLocation
+
 
 class LocationRepo:
     db: Session

@@ -1,10 +1,10 @@
 from datetime import datetime
+from typing import List
+from uuid import UUID, uuid4
 
 from fastapi import Depends
-from uuid import UUID, uuid4
-from typing import List
 
-from app_post.app.models.post_model import Post, CreatorTypes
+from app_post.app.models.post_model import Post
 from app_post.app.repositories.db_post_repo import PostRepo
 
 
@@ -21,5 +21,6 @@ class PostService:
         return self.post_repo.get_post_by_id(post_id)
 
     def create_post(self, creator_id: UUID, caption: str, creator_type: str) -> Post:
-        post = Post(post_id=uuid4(), creator_id=creator_id, caption=caption, timestamp=datetime.utcnow(), likes=[],comments=[],attachment=[],creator_type=creator_type,views=0)
+        post = Post(post_id=uuid4(), creator_id=creator_id, caption=caption, timestamp=datetime.utcnow(), likes=[],
+                    comments=[], attachment=[], creator_type=creator_type, views=0)
         return self.post_repo.create_post(post)

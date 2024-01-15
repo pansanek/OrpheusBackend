@@ -7,14 +7,16 @@ from app_location.app.services.location_service import LocationService
 
 location_router = APIRouter(prefix='/locations', tags=['Locations'])
 
+
 @location_router.get('/')
 def get_locations(location_service: LocationService = Depends(LocationService)) -> list[Location]:
     return location_service.get_all_locations()
 
+
 @location_router.post('/')
 def create_location(
-    location_info: CreateLocationRequest,
-    location_service: LocationService = Depends(LocationService)
+        location_info: CreateLocationRequest,
+        location_service: LocationService = Depends(LocationService)
 ) -> Location:
     try:
         location = location_service.create_location(
@@ -26,6 +28,7 @@ def create_location(
         return location.dict()
     except KeyError:
         raise HTTPException(400, f'Location with admin_id={location_info.admin_id} already exists')
+
 
 @location_router.get('/{id}')
 def get_location_by_id(id: UUID, location_service: LocationService = Depends(LocationService)) -> Location:

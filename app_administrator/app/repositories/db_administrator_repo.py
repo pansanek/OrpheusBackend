@@ -1,11 +1,13 @@
 import traceback
 from typing import List
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
-from app_administrator.app.database import get_db  # Подставьте свой путь
+from app_administrator.app.database import get_db
 from app_administrator.app.models.administrator_model import Administrator
 from app_administrator.app.schemas.administrator_schema import Administrator as DBAdministrator
+
 
 class AdministratorRepo:
     db: Session

@@ -1,6 +1,5 @@
 from sqlalchemy import Column, String, Enum, JSON
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base, relationship
 
 from app_user.app.models.user_model import UserTypes
 from app_user.app.schemas.base_schema import Base

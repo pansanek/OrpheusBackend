@@ -3,19 +3,21 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 
 from app_post.app.models.post_model import CreatePostRequest
-from app_post.app.services.post_service import PostService
 from app_post.app.models.post_model import Post
+from app_post.app.services.post_service import PostService
 
 post_router = APIRouter(prefix='/posts', tags=['Posts'])
+
 
 @post_router.get('/')
 def get_posts(post_service: PostService = Depends(PostService)) -> list[Post]:
     return post_service.get_all_posts()
 
+
 @post_router.post('/')
 def create_post(
-    post_info: CreatePostRequest,
-    post_service: PostService = Depends(PostService)
+        post_info: CreatePostRequest,
+        post_service: PostService = Depends(PostService)
 ) -> Post:
     try:
         post = post_service.create_post(
@@ -26,6 +28,7 @@ def create_post(
         return post.dict()
     except KeyError:
         raise HTTPException(400, f'Post with id={post_info.user_id} already exists')
+
 
 @post_router.get('/{id}')
 def get_post_by_id(id: UUID, post_service: PostService = Depends(PostService)) -> Post:

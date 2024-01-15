@@ -1,9 +1,9 @@
 from typing import List
-from fastapi import Depends
 from uuid import UUID, uuid4
 
+from fastapi import Depends
+
 from app_location.app.models.location_model import Location
-from app_location.app.models.photo_url_model import PhotoUrl
 from app_location.app.repositories.db_location_repo import LocationRepo
 
 

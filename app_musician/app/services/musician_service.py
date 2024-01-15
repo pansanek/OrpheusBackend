@@ -1,5 +1,6 @@
 from typing import List
 from uuid import UUID, uuid4
+
 from fastapi import Depends
 
 from app_musician.app.models.musician_model import Musician

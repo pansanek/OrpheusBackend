@@ -1,12 +1,8 @@
-from enum import Enum
 from typing import List
-
-from pydantic import BaseModel
 from uuid import UUID
-from pydantic import BaseModel
-from datetime import datetime
 
-from app_band.app.models.photo_url_model import PhotoUrl
+from pydantic import BaseModel
+
 from app_band.app.models.genre_types import GenreTypes
 
 

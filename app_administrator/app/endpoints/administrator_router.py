@@ -1,4 +1,5 @@
 from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException
 
 from app_administrator.app.models.administrator_model import CreateAdministratorRequest, Administrator

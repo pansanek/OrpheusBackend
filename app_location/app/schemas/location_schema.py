@@ -1,10 +1,6 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey, JSON, Enum, Integer
+from sqlalchemy import Column, String, JSON
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base, relationship
 
-from app_band.app.models.genre_types import GenreTypes
-from app_musician.app.models.instrument_types import InstrumentTypes
-from app_post.app.models.post_model import CreatorTypes
 from app_post.app.schemas.base_schema import Base
 
 

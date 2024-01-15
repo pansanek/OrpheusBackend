@@ -1,6 +1,6 @@
-# /app_printing/app/settings.py
-from pathlib import Path
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 

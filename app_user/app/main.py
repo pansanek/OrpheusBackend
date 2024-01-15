@@ -1,11 +1,11 @@
-
-
 import asyncio
+
 from fastapi import FastAPI
 
 from app_user.app.endpoints.user_router import user_router
 
 app = FastAPI(title='App')
+
 
 @app.on_event('startup')
 def startup():
@@ -13,4 +13,3 @@ def startup():
 
 
 app.include_router(user_router, prefix='/api')
-

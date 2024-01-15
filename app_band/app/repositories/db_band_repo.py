@@ -1,11 +1,13 @@
 import traceback
 from typing import List
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 
 from app_band.app.database import get_db
 from app_band.app.models.band_model import Band
 from app_band.app.schemas.band_schema import Band as DBBand
+
 
 class BandRepo:
     db: Session

@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import List
 from uuid import UUID, uuid4
-from datetime import datetime
+
 from fastapi import Depends
 
 from app_comment.app.models.comment_model import Comment
