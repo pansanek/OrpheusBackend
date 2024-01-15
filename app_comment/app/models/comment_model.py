@@ -5,17 +5,15 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
-class UserTypes(str, Enum):
-    Musician = "Musician"
-    Administrator = "Administrator"
-
-
 class Comment(BaseModel):
     id: UUID
+    post_id: UUID
     user_id: UUID
     text: str
     timestamp: datetime
 
+
 class CreateCommentRequest(BaseModel):
     user_id: UUID
+    post_id: UUID
     text: str

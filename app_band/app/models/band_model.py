@@ -13,9 +13,12 @@ from app_band.app.models.genre_types import GenreTypes
 class Band(BaseModel):
     id: UUID
     name: str
-    members: List[UUID]
+    members: List[dict]
     genre: GenreTypes
-    photo: PhotoUrl
+    photo: dict  # PhotoUrl
+
 
 class CreateBandRequest(BaseModel):
     name: str
+    member: UUID
+    genre: GenreTypes

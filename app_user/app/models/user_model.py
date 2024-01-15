@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 from app_user.app.models.photo_url_model import PhotoUrl
+from app_user.app.models.user_settings_model import UserSettings
 
 
 class UserTypes(str, Enum):
@@ -19,8 +20,9 @@ class User(BaseModel):
     email: str
     about: str
     user_type: UserTypes
-    profile_picture: PhotoUrl
-    background_picture: PhotoUrl
+    profile_picture: dict #PhotoUrl
+    background_picture: dict #PhotoUrl
+    settings: dict #UserSettings
 
 class CreateUserRequest(BaseModel):
     login: str

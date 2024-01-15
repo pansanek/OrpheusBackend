@@ -6,7 +6,8 @@ from datetime import datetime
 from typing import List
 
 from app_attachment.app.models.attachment_model import Attachment
-from app_comment.app.models.comment_model import Comment
+from app_post.app.models.photo_url_model import PhotoUrl
+
 
 class CreatorTypes(str, Enum):
     USER = "User"
@@ -17,18 +18,16 @@ class Post(BaseModel):
     post_id: UUID
     creator_id: UUID
     caption: str
-    image: str
     timestamp: datetime
-    likes: List[UUID]
+    likes: List[dict]
     views: int
-    comments: List[Comment]
-    attachment: List[Attachment]
+    comments: List[dict]
+    attachment: List[dict]
     creator_type: CreatorTypes
 
 
 
 class CreatePostRequest(BaseModel):
-    user_id: UUID
+    creator_id: UUID
     caption: str
-    image: str
     creator_type: CreatorTypes

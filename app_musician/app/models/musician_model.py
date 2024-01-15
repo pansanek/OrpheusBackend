@@ -12,12 +12,12 @@ from app_musician.app.models.instrument_types import InstrumentTypes
 
 class Musician(BaseModel):
     id: UUID
-    user_id: str
+    user_id: UUID
     genre: GenreTypes
     instrument: InstrumentTypes
 
 
 class CreateMusicianRequest(BaseModel):
-    user_id: str
+    user_id: UUID
     genre: GenreTypes
     instrument: InstrumentTypes
