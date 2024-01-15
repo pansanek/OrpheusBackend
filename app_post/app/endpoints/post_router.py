@@ -19,9 +19,8 @@ def create_post(
 ) -> Post:
     try:
         post = post_service.create_post(
-            user_id=post_info.user_id,
+            creator_id=post_info.user_id,
             caption=post_info.caption,
-            image=post_info.image,
             creator_type=post_info.creator_type
         )
         return post.dict()

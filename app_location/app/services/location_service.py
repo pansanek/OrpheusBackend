@@ -19,6 +19,6 @@ class LocationService:
     def get_location_by_id(self, location_id: UUID) -> Location:
         return self.location_repo.get_location_by_id(location_id)
 
-    def create_location(self, admin_id: UUID, name: str, address: str, about: str, profile_picture: PhotoUrl) -> Location:
-        location = Location(id=uuid4(), admin_id=admin_id, name=name, address=address, about=about, profile_picture=profile_picture.__dict__)
+    def create_location(self, admin_id: UUID, name: str, address: str, about: str) -> Location:
+        location = Location(id=uuid4(), admin_id=admin_id, name=name, address=address, about=about, profile_picture={})
         return self.location_repo.create_location(location)

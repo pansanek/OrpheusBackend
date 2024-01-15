@@ -20,8 +20,8 @@ class BandService:
     def get_band_by_id(self, band_id: UUID) -> Band:
         return self.band_repo.get_band_by_id(band_id)
 
-    def create_band(self, name: str, member: UUID, genre: GenreTypes, photo: PhotoUrl) -> Band:
+    def create_band(self, name: str, member: UUID, genre: GenreTypes) -> Band:
         members = []
         members.append(member.__dict__)
-        band = Band(id=uuid4(), name=name, members=members, genre=genre, photo=photo.__dict__)
+        band = Band(id=uuid4(), name=name, members=members, genre=genre, photo={})
         return self.band_repo.create_band(band)
