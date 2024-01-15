@@ -31,7 +31,7 @@ services:
       context: ./
       dockerfile: ./app_user/Dockerfile
     ports:
-      - "80:80"
+      - "88:88"
     depends_on:
       - postgres-delivery
     networks:

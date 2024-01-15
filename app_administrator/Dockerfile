@@ -15,6 +15,6 @@ COPY ../.env /app_administrator
 COPY ./app_administrator/migration /app_administrator/migration
 COPY ./app_administrator/alembic.ini /app_administrator/alembic.ini
 
-EXPOSE 81
+EXPOSE 80
 
-CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 81"]
+CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 80"]
