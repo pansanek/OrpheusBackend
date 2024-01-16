@@ -2,9 +2,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_user.app.models.user_model import CreateUserRequest
-from app_user.app.models.user_model import User
-from app_user.app.services.user_service import UserService
+from app.models.user_model import CreateUserRequest
+from app.models.user_model import User
+from app.services.user_service import UserService
 
 user_router = APIRouter(prefix='/users', tags=['Users'])
 

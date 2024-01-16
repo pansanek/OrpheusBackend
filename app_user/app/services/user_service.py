@@ -3,8 +3,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_user.app.models.user_model import User
-from app_user.app.repositories.db_user_repo import UserRepo
+from app.models.user_model import User
+from app.repositories.db_user_repo import UserRepo
 
 
 class UserService:

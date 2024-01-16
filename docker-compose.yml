@@ -33,7 +33,7 @@ services:
     ports:
       - "88:88"
     depends_on:
-      - postgres-delivery
+      - postgres
     networks:
       - app
 
@@ -55,7 +55,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: vkryazhevskikh@gmail.com
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
