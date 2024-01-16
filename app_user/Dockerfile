@@ -1,7 +1,7 @@
 FROM python:3.10
 
 # Выбор папки, в которой будет вестись работа
-WORKDIR /app_user
+WORKDIR /code
 
 # Установка зависимостей проекта
 COPY ./requirements.txt /app_user/
