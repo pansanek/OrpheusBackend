@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_administrator.app.models.administrator_model import CreateAdministratorRequest, Administrator
-from app_administrator.app.services.administrator_service import AdministratorService
+from app.models.administrator_model import CreateAdministratorRequest, Administrator
+from app.services.administrator_service import AdministratorService
 
 administrator_router = APIRouter(prefix='/administrators', tags=['Administrators'])
 

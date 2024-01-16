@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, DateTime, JSON, Enum, Integer
 from sqlalchemy.dialects.postgresql import UUID
 
-from app_post.app.models.post_model import CreatorTypes
-from app_post.app.schemas.base_schema import Base
+from app.models.post_model import CreatorTypes
+from app.schemas.base_schema import Base
 
 
 class Post(Base):

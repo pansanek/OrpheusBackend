@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_location.app.models.location_model import Location, CreateLocationRequest
-from app_location.app.services.location_service import LocationService
+from app.models.location_model import Location, CreateLocationRequest
+from app.services.location_service import LocationService
 
 location_router = APIRouter(prefix='/locations', tags=['Locations'])
 

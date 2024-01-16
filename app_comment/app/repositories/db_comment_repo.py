@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_comment.app.database import get_db
-from app_comment.app.models.comment_model import Comment
-from app_comment.app.schemas.comment_schema import Comment as DBComment
+from app.database import get_db
+from app.models.comment_model import Comment
+from app.schemas.comment_schema import Comment as DBComment
 
 
 class CommentRepo:

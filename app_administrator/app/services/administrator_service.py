@@ -3,8 +3,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_administrator.app.models.administrator_model import Administrator
-from app_administrator.app.repositories.db_administrator_repo import AdministratorRepo
+from app.models.administrator_model import Administrator
+from app.repositories.db_administrator_repo import AdministratorRepo
 
 
 class AdministratorService:

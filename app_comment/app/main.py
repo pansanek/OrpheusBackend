@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app_comment.app.endpoints.comment_router import comment_router
+from app.endpoints.comment_router import comment_router
 
 app = FastAPI(title='App')
 

@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app_band.app.endpoints.band_router import band_router
+from app.endpoints.band_router import band_router
 
 app = FastAPI(title='App')
 

@@ -2,9 +2,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_post.app.models.post_model import CreatePostRequest
-from app_post.app.models.post_model import Post
-from app_post.app.services.post_service import PostService
+from app.models.post_model import CreatePostRequest
+from app.models.post_model import Post
+from app.services.post_service import PostService
 
 post_router = APIRouter(prefix='/posts', tags=['Posts'])
 

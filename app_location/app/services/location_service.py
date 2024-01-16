@@ -3,8 +3,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_location.app.models.location_model import Location
-from app_location.app.repositories.db_location_repo import LocationRepo
+from app.models.location_model import Location
+from app.repositories.db_location_repo import LocationRepo
 
 
 class LocationService:

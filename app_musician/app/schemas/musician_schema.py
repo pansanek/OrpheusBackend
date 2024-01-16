@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Enum
 from sqlalchemy.dialects.postgresql import UUID
 
-from app_band.app.models.genre_types import GenreTypes
-from app_musician.app.models.instrument_types import InstrumentTypes
-from app_post.app.schemas.base_schema import Base
+from app.models.genre_types import GenreTypes
+from app.models.instrument_types import InstrumentTypes
+from app.schemas.base_schema import Base
 
 
 class Musician(Base):

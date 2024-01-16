@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app_administrator.app.endpoints.administrator_router import administrator_router
+from app.endpoints.administrator_router import administrator_router
 
 app = FastAPI(title='App')
 

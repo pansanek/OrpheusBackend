@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_comment.app.models.comment_model import Comment, CreateCommentRequest
-from app_comment.app.services.comment_service import CommentService
+from app.models.comment_model import Comment, CreateCommentRequest
+from app.services.comment_service import CommentService
 
 comment_router = APIRouter(prefix='/comments', tags=['Comments'])
 

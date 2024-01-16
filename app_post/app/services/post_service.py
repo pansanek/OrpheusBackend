@@ -4,8 +4,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_post.app.models.post_model import Post
-from app_post.app.repositories.db_post_repo import PostRepo
+from app.models.post_model import Post
+from app.repositories.db_post_repo import PostRepo
 
 
 class PostService:

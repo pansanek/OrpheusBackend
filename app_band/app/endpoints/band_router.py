@@ -3,8 +3,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_band.app.models.band_model import Band, CreateBandRequest
-from app_band.app.services.band_service import BandService
+from app.models.band_model import Band, CreateBandRequest
+from app.services.band_service import BandService
 
 band_router = APIRouter(prefix='/bands', tags=['Bands'])
 

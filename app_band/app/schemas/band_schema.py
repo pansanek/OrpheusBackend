@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, JSON, Enum
 from sqlalchemy.dialects.postgresql import UUID
 
-from app_band.app.models.genre_types import GenreTypes
-from app_post.app.schemas.base_schema import Base
+from app.models.genre_types import GenreTypes
+from app.schemas.base_schema import Base
 
 
 class Band(Base):

@@ -4,8 +4,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_comment.app.models.comment_model import Comment
-from app_comment.app.repositories.db_comment_repo import CommentRepo
+from app.models.comment_model import Comment
+from app.repositories.db_comment_repo import CommentRepo
 
 
 class CommentService:

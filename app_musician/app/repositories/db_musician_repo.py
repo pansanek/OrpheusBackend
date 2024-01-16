@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_musician.app.database import get_db
-from app_musician.app.models.musician_model import Musician
-from app_musician.app.schemas.musician_schema import Musician as DBMusician
+from app.database import get_db
+from app.models.musician_model import Musician
+from app.schemas.musician_schema import Musician as DBMusician
 
 
 class MusicianRepo:

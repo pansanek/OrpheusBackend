@@ -3,8 +3,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_musician.app.models.musician_model import Musician
-from app_musician.app.repositories.db_musician_repo import MusicianRepo
+from app.models.musician_model import Musician
+from app.repositories.db_musician_repo import MusicianRepo
 
 
 class MusicianService:

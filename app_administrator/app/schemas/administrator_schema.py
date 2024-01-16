@@ -1,7 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy.dialects.postgresql import UUID
 
-from app_post.app.schemas.base_schema import Base
+from .app.schemas.base_schema import Base
 
 
 class Administrator(Base):

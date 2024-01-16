@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_musician.app.models.musician_model import Musician, CreateMusicianRequest
-from app_musician.app.services.musician_service import MusicianService
+from app.models.musician_model import Musician, CreateMusicianRequest
+from app.services.musician_service import MusicianService
 
 musician_router = APIRouter(prefix='/musicians', tags=['Musicians'])
 
