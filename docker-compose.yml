@@ -37,72 +37,80 @@ services:
     networks:
       - app
 
-  app_post:
-    build:
-      context: .
-      dockerfile: /app_post/Dockerfile
-    ports:
-      - "87:87"
-    depends_on:
-      - postgres
-    networks:
-      - app
+#  app_post:
+#    build:
+#      context: .
+#      dockerfile: /app_post/Dockerfile
+#    ports:
+#      - "87:87"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+#
+#  app_musician:
+#    build:
+#      context: .
+#      dockerfile: /app_musician/Dockerfile
+#    ports:
+#      - "86:86"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+#
+#  app_location:
+#    build:
+#      context: .
+#      dockerfile: /app_location/Dockerfile
+#    ports:
+#      - "85:85"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+#
+#  app_comment:
+#    build:
+#      context: .
+#      dockerfile: /app_comment/Dockerfile
+#    ports:
+#      - "84:84"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+#
+#  app_band:
+#    build:
+#      context: .
+#      dockerfile: /app_band/Dockerfile
+#    ports:
+#      - "83:83"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+#
+#  app_administrator:
+#    build:
+#      context: .
+#      dockerfile: /app_administrator/Dockerfile
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
 
-  app_musician:
-    build:
-      context: .
-      dockerfile: /app_musician/Dockerfile
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pas@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "86:86"
-    depends_on:
-      - postgres
-    networks:
-      - app
-
-  app_location:
-    build:
-      context: .
-      dockerfile: /app_location/Dockerfile
-    ports:
-      - "85:85"
-    depends_on:
-      - postgres
-    networks:
-      - app
-
-  app_comment:
-    build:
-      context: .
-      dockerfile: /app_comment/Dockerfile
-    ports:
-      - "84:84"
-    depends_on:
-      - postgres
-    networks:
-      - app
-
-  app_band:
-    build:
-      context: .
-      dockerfile: /app_band/Dockerfile
-    ports:
-      - "83:83"
-    depends_on:
-      - postgres
-    networks:
-      - app
-
-  app_administrator:
-    build:
-      context: .
-      dockerfile: /app_administrator/Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - postgres
-    networks:
-      - app
-
+      - "5050:80"
 #  gateway:
 #    build:
 #      context: ./
@@ -118,15 +126,6 @@ services:
 #    networks:
 #      - app
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    networks:
-      - app
 ###########################
   ############################
   ##############################
@@ -150,7 +149,7 @@ services:
 
 networks:
   app:
-#    name: app
+    name: app
 
 volumes:
   postgres_data:

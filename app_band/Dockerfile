@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir --upgrade -r /app_band/requirements.txt
 
 # Перенос проекта в образ
 COPY ./app_band/app /app_band/app
-COPY ../.env /app_band
+COPY .env /app_band
 
 # Копирование файлов alembic
 COPY ./app_band/migration /app_band/migration
