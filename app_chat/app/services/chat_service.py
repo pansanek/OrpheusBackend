@@ -19,7 +19,7 @@ class ChatService:
     def get_chat_by_id(self, chat_id: UUID) -> Chat:
         return self.chat_repo.get_chat_by_id(chat_id)
 
-    def create_chat(self, name: str, users: List[dict]) -> Chat:
+    def create_chat(self, users: List[dict]) -> Chat:
         chat = Chat(id=uuid4(), users=users, last_message = "")
         return self.chat_repo.create_chat(chat)
 
