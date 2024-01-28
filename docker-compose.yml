@@ -103,6 +103,17 @@ services:
 #    networks:
 #      - app
 
+#  app_chat:
+#    build:
+#      context: .
+#      dockerfile: /app_chat/Dockerfile
+#    ports:
+#      - "82:82"
+#    depends_on:
+#      - postgres
+#    networks:
+#      - app
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
