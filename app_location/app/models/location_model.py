@@ -2,6 +2,8 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
+from app.models.administrator_model import Administrator
+
 
 class Location(BaseModel):
     id: UUID
@@ -13,7 +15,7 @@ class Location(BaseModel):
 
 
 class CreateLocationRequest(BaseModel):
-    admin_id: UUID
+    admin: Administrator
     name: str
     address: str
     about: str
