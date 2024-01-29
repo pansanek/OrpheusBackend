@@ -8,7 +8,7 @@ class Message(Base):
     __tablename__ = 'messages'
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True, nullable=False)
-    chat_id = Column(UUID(as_uuid=True), nullable=False)
-    from_user = Column(UUID(as_uuid=True), nullable=False)
+    chat = Column(JSON, nullable=False)
+    from_user = Column(JSON, nullable=False)
     timestamp = Column(DateTime, nullable=False)
     content = Column(String, nullable=False)
