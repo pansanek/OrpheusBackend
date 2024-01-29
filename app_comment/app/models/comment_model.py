@@ -21,26 +21,10 @@ class User(BaseModel):
     background_picture: dict  # PhotoUrl
     settings: dict  # UserSettings
 
-class CreatorTypes(str, Enum):
-    USER = "User"
-    BAND = "Band"
-    LOCATION = "Location"
-
-
-class Post(BaseModel):
-    post_id: UUID
-    creator_id: UUID
-    caption: str
-    timestamp: datetime
-    likes: List[dict]
-    views: int
-    comments: List[dict]
-    attachment: List[dict]
-    creator_type: CreatorTypes
 
 class Comment(BaseModel):
     id: UUID
-    post: Post
+    post_id: UUID
     user: User
     text: str
     timestamp: datetime
@@ -48,5 +32,5 @@ class Comment(BaseModel):
 
 class CreateCommentRequest(BaseModel):
     user: User
-    post: Post
+    post_id: UUID
     text: str

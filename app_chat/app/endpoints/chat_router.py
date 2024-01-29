@@ -21,7 +21,8 @@ def create_chat(
 ) -> chat:
     try:
         chat = chat_service.create_chat(
-            users=chat_info.users,
+            creator=chat_info.creator,
+            second_user=chat_info.second_user
         )
         return chat.dict()
     except KeyError:

@@ -21,12 +21,12 @@ def create_administrator(
 ) -> Administrator:
     try:
         administrator = administrator_service.create_administrator(
-            user_id=administrator_info.user_id,
+            user=administrator_info.user,
             location_id=administrator_info.location_id
         )
         return administrator.dict()
     except KeyError:
-        raise HTTPException(400, f'Administrator with user_id={administrator_info.user_id} already exists')
+        raise HTTPException(400, f'Administrator {str(administrator_info.user)} already exists')
 
 
 @administrator_router.get('/{id}')

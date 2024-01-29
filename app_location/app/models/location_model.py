@@ -7,7 +7,7 @@ from app.models.administrator_model import Administrator
 
 class Location(BaseModel):
     id: UUID
-    admin_id: UUID
+    admin: Administrator
     name: str
     address: str
     about: str

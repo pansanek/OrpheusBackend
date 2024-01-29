@@ -27,4 +27,5 @@ class Chat(BaseModel):
 
 
 class CreateChatRequest(BaseModel):
-    users: List[dict]
+    creator: User
+    second_user: User

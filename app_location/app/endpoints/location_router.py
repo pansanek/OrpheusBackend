@@ -20,7 +20,7 @@ def create_location(
 ) -> Location:
     try:
         location = location_service.create_location(
-            admin_id=location_info.admin_id,
+            admin=location_info.admin,
             name=location_info.name,
             address=location_info.address,
             about=location_info.about

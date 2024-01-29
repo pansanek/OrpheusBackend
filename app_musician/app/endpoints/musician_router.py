@@ -20,7 +20,7 @@ def create_musician(
 ) -> Musician:
     try:
         musician = musician_service.create_musician(
-            user_id=musician_info.user_id,
+            user=musician_info.user,
             genre=musician_info.genre,
             instrument=musician_info.instrument
         )

@@ -20,8 +20,8 @@ def create_comment(
 ) -> Comment:
     try:
         comment = comment_service.create_comment(
-            user_id=comment_info.user_id,
-            post_id=comment_info.post_id,
+            user=comment_info.user,
+            post=comment_info.post_id,
             text=comment_info.text
         )
         return comment.dict()

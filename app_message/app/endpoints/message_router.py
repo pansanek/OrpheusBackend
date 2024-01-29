@@ -21,7 +21,7 @@ def create_message(
 ) -> message:
     try:
         message = message_service.create_message(
-            chat_id=message_info.chat_id,
+            chat=message_info.chat,
             from_user=message_info.from_user,
             content = message_info.content
         )

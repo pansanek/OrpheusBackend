@@ -3,7 +3,7 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.administrator_model import Administrator
+from app.models.administrator_model import Administrator, User
 from app.repositories.db_administrator_repo import AdministratorRepo
 
 
@@ -19,6 +19,6 @@ class AdministratorService:
     def get_administrator_by_id(self, admin_id: UUID) -> Administrator:
         return self.admin_repo.get_administrator_by_id(admin_id)
 
-    def create_administrator(self, user_id: str, location_id: UUID) -> Administrator:
-        administrator = Administrator(id=uuid4(), user_id=user_id, location_id=location_id)
+    def create_administrator(self, user: User, location_id: UUID) -> Administrator:
+        administrator = Administrator(id=uuid4(), user=user, location_id=location_id)
         return self.admin_repo.create_administrator(administrator)
