@@ -51,3 +51,10 @@ class MessageRepo:
             raise KeyError(f"Message with id {message_id} not found.")
         return self._map_to_model(message)
 
+    def get_messages_by_chat_id(self, chat_id: UUID) -> List[Message]:
+        messages = self.db.query(DBMessage).filter(DBMessage.chat_id == chat_id).all()
+
+        if not messages:
+            raise KeyError(f"Messages with chat_id {chat_id} not found.")
+
+        return [self._map_to_model(message) for message in messages]

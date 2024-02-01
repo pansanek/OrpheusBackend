@@ -20,6 +20,9 @@ class MessageService:
     def get_message_by_id(self, message_id: UUID) -> Message:
         return self.message_repo.get_message_by_id(message_id)
 
+    def get_messages_by_chat_id(self, chat_id: UUID) -> List[Message]:
+        return self.message_repo.get_messages_by_chat_id(chat_id)
+
     def create_message(self, chat: Chat,
                        from_user: User,
                        content: str) -> Message:
