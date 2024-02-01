@@ -21,14 +21,10 @@ class User(BaseModel):
     background_picture: dict  # PhotoUrl
     settings: dict  # UserSettings
 
-class Chat(BaseModel):
-    id: UUID
-    users: List[dict]
-    last_message: str
 
 class Message(BaseModel):
     id: UUID
-    chat: Chat
+    chat_id: UUID
     from_user: User
     timestamp: datetime
     content: str
