@@ -37,3 +37,11 @@ def get_post_by_id(id: UUID, post_service: PostService = Depends(PostService)) -
         return post.dict()
     except KeyError:
         raise HTTPException(404, f'Post with id={id} not found')
+
+@post_router.get('/creator/{id}')
+def get_post_by_creator_id(id: UUID, post_service: PostService = Depends(PostService)) -> Post:
+    try:
+        post = post_service.get_post_by_creator_id(id)
+        return post.dict()
+    except KeyError:
+        raise HTTPException(404, f'Post with id={id} not found')

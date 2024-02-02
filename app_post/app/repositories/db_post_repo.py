@@ -50,3 +50,11 @@ class PostRepo:
         if post is None:
             raise KeyError(f"Post with id {post_id} not found.")
         return self._map_to_model(post)
+
+    def get_post_by_creator_id(self, creator_id: UUID) -> List[Post]:
+        posts = self.db.query(DBPost).filter(DBPost.creator_id == creator_id).all()
+
+        if not posts:
+            raise KeyError(f"Messages with creator_id {creator_id} not found.")
+
+        return [self._map_to_model(post) for post in posts]
