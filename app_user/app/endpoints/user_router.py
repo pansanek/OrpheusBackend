@@ -22,6 +22,7 @@ def create_user(
     try:
         user = user_service.create_user(
             login=user_info.login,
+            name=user_info.name,
             password=user_info.password,
             email=user_info.email,
             about=user_info.about,

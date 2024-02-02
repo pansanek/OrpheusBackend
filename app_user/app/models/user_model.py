@@ -12,6 +12,7 @@ class UserTypes(str, Enum):
 class User(BaseModel):
     id: UUID
     login: str
+    name: str
     password: str
     email: str
     about: str
@@ -23,6 +24,7 @@ class User(BaseModel):
 
 class CreateUserRequest(BaseModel):
     login: str
+    name: str
     password: str
     email: str
     about: str

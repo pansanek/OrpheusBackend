@@ -10,6 +10,7 @@ class User(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True, nullable=False)
     login = Column(String, index=True, unique=True, nullable=False)
+    name = Column(String, index=True, unique=True, nullable=False)
     password = Column(String, nullable=False)
     email = Column(String, index=True, unique=True, nullable=False)
     about = Column(String, nullable=True)
