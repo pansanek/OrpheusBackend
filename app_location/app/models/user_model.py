@@ -12,6 +12,7 @@ class User(BaseModel):
     id: UUID
     login: str
     password: str
+    name: str
     email: str
     about: str
     user_type: UserTypes
@@ -19,12 +20,3 @@ class User(BaseModel):
     background_picture: dict  # PhotoUrl
     settings: dict  # UserSettings
 
-class Administrator(BaseModel):
-    id: UUID
-    user: User
-    location_id: UUID
-
-
-class CreateAdministratorRequest(BaseModel):
-    user_id: str
-    location_id: UUID
