@@ -57,5 +57,5 @@ class UserRepo:
             .filter((DBUser.login == login) & (DBUser.password == password)) \
             .first()
         if user is None:
-            raise KeyError(f"User {login} not found.")
-        return "OK"
+            return "NOT OK"
+        return str(user.id)
