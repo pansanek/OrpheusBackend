@@ -50,3 +50,12 @@ class UserRepo:
         if user is None:
             raise KeyError(f"User with id {user_id} not found.")
         return self._map_to_model(user)
+
+    def authorize(self, login: str, password: str) -> str:
+        user = self.db \
+            .query(DBUser) \
+            .filter((DBUser.login == login) & (DBUser.password == password)) \
+            .first()
+        if user is None:
+            raise KeyError(f"User {login} not found.")
+        return "OK"

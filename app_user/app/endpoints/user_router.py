@@ -40,3 +40,12 @@ def get_user_by_id(id: UUID, user_service: UserService = Depends(UserService)) -
         return user.dict()
     except KeyError:
         raise HTTPException(404, f'User with id={id} not found')
+
+
+@user_router.get('/auth')
+def authorize(login: str, password: str, user_service: UserService = Depends(UserService)) -> str:
+    try:
+        user = user_service.authorize(login,password)
+        return "OK"
+    except KeyError:
+        raise HTTPException(404, f'User with id={id} not found')
