@@ -22,7 +22,10 @@ def create_chat(
     try:
         chat = chat_service.create_chat(
             creator=chat_info.creator,
-            second_user=chat_info.second_user
+            second_user=chat_info.second_user,
+            last_message=chat_info.last_message,
+            picture=chat_info.picture,
+            name=chat_info.name,
         )
         return chat.dict()
     except KeyError:
@@ -41,12 +44,12 @@ def get_chat_by_id(id: UUID, chat_service: chatService = Depends(chatService)) -
 @chat_router.post('/{id}/update')
 def update_chat_last_message(
         id: UUID,
-        lastMessage : str,
+        lastMessage: str,
         chat_service: chatService = Depends(chatService)
 ) -> chat:
     try:
         chat = chat_service.update_chat_last_message(
-            id = id,
+            id=id,
             last_message=lastMessage
         )
         return chat.dict()

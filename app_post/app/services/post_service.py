@@ -7,6 +7,8 @@ from fastapi import Depends
 from app.models.post_model import Post
 from app.repositories.db_post_repo import PostRepo
 
+from app.models.post_model import CreatorTypes
+
 
 class PostService:
     post_repo: PostRepo
@@ -23,7 +25,15 @@ class PostService:
     def get_post_by_creator_id(self, creator_id: UUID) -> List[Post]:
         return self.post_repo.get_post_by_creator_id(creator_id)
 
-    def create_post(self, creator_id: UUID, caption: str, creator_type: str) -> Post:
-        post = Post(post_id=uuid4(), creator_id=creator_id, caption=caption, timestamp=datetime.utcnow(), likes=[],
-                    comments=[], attachment=[], creator_type=creator_type, views=0)
+    def create_post(self, creator_id: UUID,
+                    creatorName: str,
+                    creatorPicture: dict,
+                    text: str,
+                    likes: List[dict],
+                    comments: List[dict],
+                    attachment: dict,
+                    creator_type: CreatorTypes) -> Post:
+        post = Post(post_id=uuid4(), creator_id=creator_id, text=text, timestamp=datetime.utcnow(), likes=likes,
+                    comments=comments, attachment=attachment, creator_type=creator_type, views=0,
+                    creatorName=creatorName, creatorPicture=creatorPicture)
         return self.post_repo.create_post(post)

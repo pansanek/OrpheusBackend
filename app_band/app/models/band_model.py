@@ -17,5 +17,5 @@ class Band(BaseModel):
 
 class CreateBandRequest(BaseModel):
     name: str
-    member: dict
+    member: List[dict]
     genre: GenreTypes

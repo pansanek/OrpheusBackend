@@ -2,50 +2,46 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.user_model import CreateNotificationRequest
-from app.models.user_model import Notification
-from app.services.user_service import NotificationService
+from app.models.notification_model import CreateNotificationRequest
+from app.models.notification_model import Notification
+from app.services.notification_service import NotificationService
 
-user_router = APIRouter(prefix='/users', tags=['Notifications'])
-
-
-@user_router.get('/')
-def get_users(user_service: NotificationService = Depends(NotificationService)) -> list[Notification]:
-    return user_service.get_all_users()
+notification_router = APIRouter(prefix='/notifications', tags=['Notifications'])
 
 
-@user_router.post('/')
-def create_user(
-        user_info: CreateNotificationRequest,
-        user_service: NotificationService = Depends(NotificationService)
+@notification_router.get('/')
+def get_notifications(notification_service: NotificationService = Depends(NotificationService)) -> list[Notification]:
+    return notification_service.get_all_notifications()
+
+
+@notification_router.post('/')
+def create_notification(
+        notification_info: CreateNotificationRequest,
+        notification_service: NotificationService = Depends(NotificationService)
 ) -> Notification:
     try:
-        user = user_service.create_user(
-            login=user_info.login,
-            name=user_info.name,
-            password=user_info.password,
-            email=user_info.email,
-            about=user_info.about,
-            user_type=user_info.user_type
+        notification = notification_service.create_notification(
+            type=notification_info.type,
+            title=notification_info.title,
+            contentDescription=notification_info.contentDescription,
+            date=notification_info.date,
+            fromUser=notification_info.fromUser,
+            toUser=notification_info.toUser,
+            postItem=notification_info.postItem,
+            bandItem=notification_info.bandItem,
         )
-        return user.dict()
+        return notification.dict()
     except KeyError:
-        raise HTTPException(400, f'Notification with login={user_info.login} already exists')
+        raise HTTPException(400, f'Notification with title={notification_info.title} already exists')
 
 
-@user_router.get('/{id}')
-def get_user_by_id(id: UUID, user_service: NotificationService = Depends(NotificationService)) -> Notification:
+@notification_router.get('/{id}')
+def get_notification_by_id(id: UUID,
+                           notification_service: NotificationService = Depends(NotificationService)) -> Notification:
     try:
-        user = user_service.get_user_by_id(id)
-        return user.dict()
+        notification = notification_service.get_notification_by_id(id)
+        return notification.dict()
     except KeyError:
         raise HTTPException(404, f'Notification with id={id} not found')
 
 
-@user_router.get('/auth')
-def authorize(login: str, password: str, user_service: NotificationService = Depends(NotificationService)) -> str:
-    try:
-        response = user_service.authorize(login,password)
-        return response
-    except KeyError:
-        raise HTTPException(404, f'Notification with id={id} not found')

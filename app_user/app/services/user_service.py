@@ -20,9 +20,13 @@ class UserService:
         return self.user_repo.get_user_by_id(user_id)
 
     def authorize(self, login: str, password: str) -> str:
-        return self.user_repo.authorize(login,password)
+        return self.user_repo.authorize(login, password)
 
-    def create_user(self, login: str, name: str, password: str, email: str, about: str, user_type: str) -> User:
-        user = User(id=uuid4(), login=login,  name=name, password=password, email=email, about=about, user_type=user_type,
-                    profile_picture={}, background_picture={})
+    def create_user(self, login: str, name: str, password: str, email: str, about: str, user_type: str,
+                    profile_picture: str,
+                    background_picture: str,
+                    settings: str) -> User:
+        user = User(id=uuid4(), login=login, name=name, password=password, email=email, about=about,
+                    user_type=user_type,
+                    profile_picture=profile_picture, background_picture=background_picture, settings=settings)
         return self.user_repo.create_user(user)

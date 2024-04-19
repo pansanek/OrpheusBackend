@@ -18,5 +18,6 @@ class Chat(BaseModel):
 class CreateChatRequest(BaseModel):
     creator: dict
     second_user: dict
+    last_message: str
     picture: dict
     name: str

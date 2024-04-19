@@ -29,3 +29,7 @@ class CreateUserRequest(BaseModel):
     email: str
     about: str
     user_type: UserTypes
+    profile_picture: dict  # PhotoUrl
+    background_picture: dict  # PhotoUrl
+    settings: dict  # UserSettings
+

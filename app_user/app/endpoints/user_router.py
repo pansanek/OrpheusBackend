@@ -26,7 +26,10 @@ def create_user(
             password=user_info.password,
             email=user_info.email,
             about=user_info.about,
-            user_type=user_info.user_type
+            user_type=user_info.user_type,
+            profile_picture=user_info.profile_picture ,
+            background_picture=user_info.background_picture ,
+            settings=user_info.settings
         )
         return user.dict()
     except KeyError:

@@ -32,4 +32,7 @@ class CreatePostRequest(BaseModel):
     creatorName: str
     creatorPicture: dict
     text: str
+    likes: List[dict]
+    comments: List[dict]
+    attachment: dict
     creator_type: CreatorTypes

@@ -21,9 +21,14 @@ def create_post(
 ) -> Post:
     try:
         post = post_service.create_post(
-            creator_id=post_info.user_id,
-            caption=post_info.caption,
-            creator_type=post_info.creator_type
+            creator_id=post_info.creator_id,
+            creatorName=post_info.creatorName,
+            creatorPicture=post_info.creatorPicture,
+            text=post_info.text,
+            likes=post_info.likes,
+            comments=post_info.comments,
+            attachment=post_info.attachment,
+            creator_type=post_info.creator_type,
         )
         return post.dict()
     except KeyError:
@@ -37,6 +42,7 @@ def get_post_by_id(id: UUID, post_service: PostService = Depends(PostService)) -
         return post.dict()
     except KeyError:
         raise HTTPException(404, f'Post with id={id} not found')
+
 
 @post_router.get('/creator/{id}')
 def get_post_by_creator_id(id: UUID, post_service: PostService = Depends(PostService)) -> Post:
