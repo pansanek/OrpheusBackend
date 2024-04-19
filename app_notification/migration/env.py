@@ -18,7 +18,7 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from app.schemas.administrator_schema import Administrator
+from app.schemas.user_schema import User
 from app.schemas.base_schema import Base
 
 target_metadata = Base.metadata

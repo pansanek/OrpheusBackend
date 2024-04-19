@@ -14,17 +14,22 @@ class CreatorTypes(str, Enum):
 
 class Post(BaseModel):
     post_id: UUID
-    creator_id: UUID
-    caption: str
-    timestamp: datetime
+    creatorId: UUID
+    creatorName: str
+    creatorPicture: dict
+    text: str
+    date: datetime
     likes: List[dict]
-    views: int
     comments: List[dict]
-    attachment: List[dict]
+    attachment:dict
     creator_type: CreatorTypes
+
+
 
 
 class CreatePostRequest(BaseModel):
     creator_id: UUID
-    caption: str
+    creatorName: str
+    creatorPicture: dict
+    text: str
     creator_type: CreatorTypes
