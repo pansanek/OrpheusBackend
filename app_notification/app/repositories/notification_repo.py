@@ -13,7 +13,7 @@ notifications: list[Notification] = [
         bandItem=None,
         contentDescription=" оценил вашу запись от ",
         title="Ваш пост оценили",
-        fromUser=User(
+        fromUser=dict(User(
             id=uuid4(),
             login="pansanek",
             name="Alex",
@@ -21,17 +21,17 @@ notifications: list[Notification] = [
             email="1@gmail.com",
             about="Hehe",
             user_type=UserTypes.MUSICIAN,
-            profile_picture=PhotoUrl(
+            profile_picture=dict(PhotoUrl(
                 id=uuid4(),
                 url="https://sun1-88.userapi.com/impg/SsYpAAyxKG2SXIKXfY8iBvf2BTxZH9XYP2PFmA/lSVeMDXQuDM.jpg?size=1435x1435&quality=95&sign=c2dff2cc261588cb4a712c853c116199&type=album"
-            ),
-            background_picture=PhotoUrl(
+            )),
+            background_picture=dict(PhotoUrl(
                 id=uuid4(),
                 url="https://sun1-88.userapi.com/impg/SsYpAAyxKG2SXIKXfY8iBvf2BTxZH9XYP2PFmA/lSVeMDXQuDM.jpg?size=1435x1435&quality=95&sign=c2dff2cc261588cb4a712c853c116199&type=album"
-            ),
-            settings=UserSettings(can_receive_messages_for_new_chats=True,
-                                  can_receive_band_invitations=True),
-        ),
+            )),
+            settings=dict(UserSettings(can_receive_messages_for_new_chats=True,
+                                  can_receive_band_invitations=True))
+        )),
     )
 ]
 
