@@ -18,3 +18,4 @@ class CreateLocationRequest(BaseModel):
     name: str
     address: str
     about: str
+    profile_picture: dict

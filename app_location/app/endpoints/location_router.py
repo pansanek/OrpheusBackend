@@ -23,7 +23,8 @@ def create_location(
             admin=location_info.admin,
             name=location_info.name,
             address=location_info.address,
-            about=location_info.about
+            about=location_info.about,
+            profile_picture=location_info.profile_picture
         )
         return location.dict()
     except KeyError:

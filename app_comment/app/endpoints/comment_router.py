@@ -22,7 +22,8 @@ def create_comment(
         comment = comment_service.create_comment(
             user=comment_info.user,
             post=comment_info.post_id,
-            text=comment_info.text
+            text=comment_info.text,
+            timestamp=comment_info.timestamp
         )
         return comment.dict()
     except KeyError:

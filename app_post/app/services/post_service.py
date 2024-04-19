@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app.models.post_model import Post
-from app.repositories.db_post_repo import PostRepo
+from app.repositories.post_repo import PostRepo
 
 from app.models.post_model import CreatorTypes
 
@@ -17,13 +17,11 @@ class PostService:
         self.post_repo = post_repo
 
     def get_all_posts(self) -> List[Post]:
-        return self.post_repo.get_all_posts()
+        return self.post_repo.get_posts()
 
     def get_post_by_id(self, post_id: UUID) -> Post:
         return self.post_repo.get_post_by_id(post_id)
 
-    def get_post_by_creator_id(self, creator_id: UUID) -> List[Post]:
-        return self.post_repo.get_post_by_creator_id(creator_id)
 
     def create_post(self, creator_id: UUID,
                     creatorName: str,

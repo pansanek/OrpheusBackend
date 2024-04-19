@@ -5,7 +5,7 @@ from fastapi import Depends
 
 from app.models.band_model import Band, User
 from app.models.genre_types import GenreTypes
-from app.repositories.db_band_repo import BandRepo
+from app.repositories.band_repo import BandRepo
 
 
 class BandService:
@@ -15,7 +15,7 @@ class BandService:
         self.band_repo = band_repo
 
     def get_all_bands(self) -> List[Band]:
-        return self.band_repo.get_all_bands()
+        return self.band_repo.get_bands()
 
     def get_band_by_id(self, band_id: UUID) -> Band:
         return self.band_repo.get_band_by_id(band_id)

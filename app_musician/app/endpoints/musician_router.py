@@ -26,7 +26,7 @@ def create_musician(
         )
         return musician.dict()
     except KeyError:
-        raise HTTPException(400, f'Musician with id={musician_info.id} already exists')
+        raise HTTPException(400, f'Musician with id={musician_info.user} already exists')
 
 
 @musician_router.get('/{id}')

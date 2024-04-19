@@ -19,3 +19,4 @@ class CreateCommentRequest(BaseModel):
     user: dict
     post_id: UUID
     text: str
+    timestamp: datetime

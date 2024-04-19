@@ -39,10 +39,3 @@ def get_message_by_id(id: UUID, message_service: messageService = Depends(messag
         raise HTTPException(404, f'message with id={id} not found')
 
 
-@message_router.get('/chat/{id}')
-def get_message_by_chat_id(id: UUID, message_service: messageService = Depends(messageService)) -> List[message]:
-    try:
-        return message_service.get_message_by_chat_id(id)
-    except KeyError:
-        raise HTTPException(404, f'chat with id={id} not found')
-

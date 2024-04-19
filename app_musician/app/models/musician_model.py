@@ -16,7 +16,7 @@ class Musician(BaseModel):
 
 
 class CreateMusicianRequest(BaseModel):
-    user_id: UUID
+    user: dict
     genre: GenreTypes
     instrument: InstrumentTypes
 

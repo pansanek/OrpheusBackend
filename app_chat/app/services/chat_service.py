@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app.models.chat_model import Chat, User
-from app.repositories.db_chat_repo import ChatRepo
+from app.repositories.chat_repo import ChatRepo
 
 
 class ChatService:
@@ -14,7 +14,7 @@ class ChatService:
         self.chat_repo = chat_repo
 
     def get_all_chats(self) -> List[Chat]:
-        return self.chat_repo.get_all_chats()
+        return self.chat_repo.get_chats()
 
     def get_chat_by_id(self, chat_id: UUID) -> Chat:
         return self.chat_repo.get_chat_by_id(chat_id)
