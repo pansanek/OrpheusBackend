@@ -3,8 +3,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.band_model import Band, CreateBandRequest
-from app.services.band_service import BandService
+from app_band.app.models.band_model import Band, CreateBandRequest
+from app_band.app.services.band_service import BandService
 
 band_router = APIRouter(prefix='/bands', tags=['Bands'])
 
@@ -22,8 +22,9 @@ def create_band(
     try:
         band = band_service.create_band(
             name=band_info.name,
-            member=band_info.member,
+            members=band_info.members,
             genre=band_info.genre,
+            photo = band_info.photo
         )
         return band.dict()
     except KeyError:

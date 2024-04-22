@@ -58,10 +58,10 @@ bands: list[Band] = [
         name="pansanek",
         members=members,
         genre=GenreTypes.METALCORE,
-        photo=PhotoUrl(
+        photo=dict(PhotoUrl(
             id=uuid4(),
             url="https://sun1-88.userapi.com/impg/SsYpAAyxKG2SXIKXfY8iBvf2BTxZH9XYP2PFmA/lSVeMDXQuDM.jpg?size=1435x1435&quality=95&sign=c2dff2cc261588cb4a712c853c116199&type=album"
-        ),
+        )),
     )
 ]
 
@@ -70,9 +70,9 @@ class BandRepo:
     def get_bands(self) -> list[Band]:
         return bands
 
-    def create_band(self, bands) -> Band:
-        bands.append(bands)
-        return bands
+    def create_band(self, band) -> Band:
+        bands.append(band)
+        return band
 
     def get_bands_by_id(self, id):
         for i in bands:

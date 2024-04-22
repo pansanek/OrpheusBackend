@@ -3,9 +3,9 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.band_model import Band, User
-from app.models.genre_types import GenreTypes
-from app.repositories.band_repo import BandRepo
+from app_band.app.models.band_model import Band
+from app_band.app.models.genre_types import GenreTypes
+from app_band.app.repositories.band_repo import BandRepo
 
 
 class BandService:
@@ -20,8 +20,6 @@ class BandService:
     def get_band_by_id(self, band_id: UUID) -> Band:
         return self.band_repo.get_band_by_id(band_id)
 
-    def create_band(self, name: str, member: User, genre: GenreTypes) -> Band:
-        members = []
-        members.append(member.__dict__)
-        band = Band(id=uuid4(), name=name, members=members, genre=genre, photo={})
+    def create_band(self, name: str, members: List[dict], genre: GenreTypes,photo:dict) -> Band:
+        band = Band(id=uuid4(), name=name, members=members, genre=genre, photo=photo)
         return self.band_repo.create_band(band)

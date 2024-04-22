@@ -17,5 +17,6 @@ class Band(BaseModel):
 
 class CreateBandRequest(BaseModel):
     name: str
-    member: List[dict]
+    members: List[dict]
+    photo: dict
     genre: GenreTypes
