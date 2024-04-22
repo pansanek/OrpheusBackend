@@ -1,7 +1,7 @@
 from typing import List
 from uuid import uuid4
 
-from app.models.User import User
+from app_user.app.models.user_model import User
 
 from app_user.app.models.photo_url_model import PhotoUrl
 from app_user.app.models.user_model import UserTypes
@@ -34,9 +34,9 @@ class UserRepo:
     def get_users(self) -> list[User]:
         return users
 
-    def create_user(self, users) -> User:
-        users.append(users)
-        return users
+    def create_user(self, user) -> User:
+        users.append(user)
+        return user
 
     def get_users_by_id(self, id):
         for i in users:
