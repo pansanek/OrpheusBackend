@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app.endpoints.user_router import user_router
+from app_notification.app.endpoints.notification_router import notification_router
 
 app = FastAPI(title='App')
 
@@ -12,4 +12,4 @@ def startup():
     loop = asyncio.get_event_loop()
 
 
-app.include_router(user_router, prefix='/api')
+app.include_router(notification_router, prefix='/api')

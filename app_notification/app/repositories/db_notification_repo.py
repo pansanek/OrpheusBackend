@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app.database import get_db
-from app.models.user_model import Notification
-from app.schemas.user_schema import Notification as DBNotification
+from app_notification.app.database import get_db
+from app_notification.app.models.notification_model import Notification
+from app_notification.app.schemas.notification_schema import Notification as DBNotification
 
 
 class NotificationRepo:

@@ -2,9 +2,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.notification_model import CreateNotificationRequest
-from app.models.notification_model import Notification
-from app.services.notification_service import NotificationService
+from app_notification.app.models.notification_model import CreateNotificationRequest
+from app_notification.app.models.notification_model import Notification
+from app_notification.app.services.notification_service import NotificationService
 
 notification_router = APIRouter(prefix='/notifications', tags=['Notifications'])
 

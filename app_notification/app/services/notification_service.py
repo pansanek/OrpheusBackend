@@ -3,10 +3,10 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.notification_model import Notification
-from app.repositories.notification_repo import NotificationRepo
+from app_notification.app.models.notification_model import Notification
+from app_notification.app.repositories.notification_repo import NotificationRepo
 
-from app.models.notification_model import NotificationType
+from app_notification.app.models.notification_model import NotificationType
 
 
 class NotificationService:
