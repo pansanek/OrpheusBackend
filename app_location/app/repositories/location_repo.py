@@ -44,9 +44,9 @@ class LocationRepo:
     def get_locations(self) -> list[Location]:
         return locations
 
-    def create_location(self, locations) -> Location:
-        locations.append(locations)
-        return locations
+    def create_location(self, location) -> Location:
+        locations.append(location)
+        return location
 
     def get_locations_by_id(self, id):
         for i in locations:
