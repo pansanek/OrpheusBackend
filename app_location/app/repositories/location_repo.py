@@ -53,3 +53,10 @@ class LocationRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_location(self, location: Location) -> Location:
+        for index, existing_location in enumerate(locations):
+            if existing_location.id == location.id:
+                locations[index] = location
+                return location
+        raise KeyError("Location not found")

@@ -50,3 +50,9 @@ class MessageRepo:
             if i.id == id:
                 return i
         raise KeyError
+    def update_message(self, message: Message) -> Message:
+        for index, existing_message in enumerate(messages):
+            if existing_message.id == message.id:
+                messages[index] = message
+                return message
+        raise KeyError("Message not found")

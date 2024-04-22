@@ -43,3 +43,9 @@ class UserRepo:
             if i.id == id:
                 return i
         raise KeyError
+    def update_user(self, user: User) -> User:
+        for index, existing_user in enumerate(users):
+            if existing_user.id == user.id:
+                users[index] = user
+                return user
+        raise KeyError("User not found")

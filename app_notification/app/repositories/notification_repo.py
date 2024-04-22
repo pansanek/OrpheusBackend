@@ -70,3 +70,10 @@ class NotificationRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_notification(self, notification: Notification) -> Notification:
+        for index, existing_notification in enumerate(notifications):
+            if existing_notification.id == notification.id:
+                notifications[index] = notification
+                return notification
+        raise KeyError("Notification not found")

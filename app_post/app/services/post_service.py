@@ -22,12 +22,11 @@ class PostService:
     def get_post_by_id(self, post_id: UUID) -> Post:
         return self.post_repo.get_post_by_id(post_id)
 
-
     def create_post(self, creatorId: UUID,
                     creatorName: str,
                     creatorPicture: dict,
                     text: str,
-                    date:str,
+                    date: str,
                     likes: List[dict],
                     comments: List[dict],
                     attachment: dict,
@@ -36,3 +35,17 @@ class PostService:
                     comments=comments, attachment=attachment, creator_type=creator_type, views=0,
                     creatorName=creatorName, creatorPicture=creatorPicture)
         return self.post_repo.create_post(post)
+
+    def update_post(self, post_id: UUID, creatorId: UUID,
+                    creatorName: str,
+                    creatorPicture: dict,
+                    text: str,
+                    date: str,
+                    likes: List[dict],
+                    comments: List[dict],
+                    attachment: dict,
+                    creator_type: CreatorTypes) -> Post:
+        post = Post(id=post_id, creatorId=creatorId, text=text, date=date, likes=likes,
+                    comments=comments, attachment=attachment, creator_type=creator_type, views=0,
+                    creatorName=creatorName, creatorPicture=creatorPicture)
+        return self.post_repo.update_post(post)

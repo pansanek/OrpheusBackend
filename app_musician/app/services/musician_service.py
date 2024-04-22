@@ -20,3 +20,7 @@ class MusicianService:
     def create_musician(self, user: dict, genre: str, instrument: str) -> Musician:
         musician = Musician(id=uuid4(), user=user, genre=genre, instrument=instrument)
         return self.musician_repo.create_musician(musician)
+
+    def update_musician(self, musician_id: UUID, user: dict, genre: str, instrument: str) -> Musician:
+        musician = Musician(id=musician_id, user=user, genre=genre, instrument=instrument)
+        return self.musician_repo.update_musician(musician)

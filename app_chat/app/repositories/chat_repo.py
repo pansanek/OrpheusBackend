@@ -78,3 +78,10 @@ class ChatRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_chat(self, chat: Chat) -> Chat:
+        for index, existing_chat in enumerate(chats):
+            if existing_chat.id == chat.id:
+                chats[index] = chat
+                return chat
+        raise KeyError("Chat not found")

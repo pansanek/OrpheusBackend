@@ -72,3 +72,9 @@ class PostRepo:
             if i.id == id:
                 return i
         raise KeyError
+    def update_post(self, post: Post) -> Post:
+        for index, existing_post in enumerate(posts):
+            if existing_post.id == post.id:
+                posts[index] = post
+                return post
+        raise KeyError("Post not found")

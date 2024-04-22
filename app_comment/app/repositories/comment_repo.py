@@ -49,3 +49,10 @@ class CommentRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_comment(self, comment: Comment) -> Comment:
+        for index, existing_comment in enumerate(comments):
+            if existing_comment.id == comment.id:
+                comments[index] = comment
+                return comment
+        raise KeyError("Comment not found")

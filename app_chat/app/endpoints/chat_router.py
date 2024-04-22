@@ -40,17 +40,21 @@ def get_chat_by_id(id: UUID, chat_service: ChatService = Depends(ChatService)) -
         raise HTTPException(404, f'chat with id={id} not found')
 
 
-@chat_router.post('/{id}/update')
-def update_chat_last_message(
-        id: UUID,
-        lastMessage: str,
+
+@chat_router.put('/{chat_id}')
+def update_chat(
+        chat_id: UUID,
+        chat_info: CreateChatRequest,
         chat_service: ChatService = Depends(ChatService)
 ) -> Chat:
     try:
-        chat = chat_service.update_chat_last_message(
-            id=id,
-            last_message=lastMessage
+        updated_chat = chat_service.update_chat(
+            chat_id=chat_id,
+            users=chat_info.users,
+            last_message=chat_info.last_message,
+            picture=chat_info.picture,
+            name=chat_info.name,
         )
-        return chat.dict()
+        return updated_chat
     except KeyError:
-        raise HTTPException(400, f'Error')
+        raise HTTPException(404, f'Chat with id={chat_id} not found')

@@ -50,3 +50,10 @@ class MusicianRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_musician(self, musician: Musician) -> Musician:
+        for index, existing_musician in enumerate(musicians):
+            if existing_musician.id == musician.id:
+                musicians[index] = musician
+                return musician
+        raise KeyError("Musician not found")

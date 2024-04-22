@@ -20,6 +20,10 @@ class BandService:
     def get_band_by_id(self, band_id: UUID) -> Band:
         return self.band_repo.get_band_by_id(band_id)
 
-    def create_band(self, name: str, members: List[dict], genre: GenreTypes,photo:dict) -> Band:
+    def create_band(self, name: str, members: List[dict], genre: GenreTypes, photo: dict) -> Band:
         band = Band(id=uuid4(), name=name, members=members, genre=genre, photo=photo)
         return self.band_repo.create_band(band)
+
+    def update_band(self, band_id: UUID, name: str, members: List[dict], genre: GenreTypes, photo: dict) -> Band:
+        band = Band(id=band_id, name=name, members=members, genre=genre, photo=photo)
+        return self.band_repo.update_band(band)

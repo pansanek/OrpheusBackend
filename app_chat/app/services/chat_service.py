@@ -25,7 +25,8 @@ class ChatService:
         chat = Chat(id=uuid4(), users=users, last_message=last_message,name=name,picture=picture)
         return self.chat_repo.create_chat(chat)
 
-    def update_chat_last_message(self, chat_id: UUID, last_message: str) -> Chat:
-        chat = self.chat_repo.get_chat_by_id(chat_id)
-        chat.last_message = last_message
-        return self.chat_repo.update_chat_last_message(chat)
+
+    def update_chat(self, chat_id: UUID, users: List[dict], picture=dict,last_message=str,
+                    name=str) -> Chat:
+        chat = Chat(id=chat_id, users=users, last_message=last_message,name=name,picture=picture)
+        return self.chat_repo.update_chat(chat)

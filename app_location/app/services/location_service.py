@@ -22,3 +22,7 @@ class LocationService:
     def create_location(self, admin: dict, name: str, address: str, about: str,profile_picture:dict) -> Location:
         location = Location(id=uuid4(), admin=admin, name=name, address=address, about=about, profile_picture=profile_picture)
         return self.location_repo.create_location(location)
+
+    def update_location(self, location_id: UUID, admin: dict, name: str, address: str, about: str,profile_picture:dict) -> Location:
+        location = Location(id=location_id, admin=admin, name=name, address=address, about=about, profile_picture=profile_picture)
+        return self.location_repo.update_location(location)

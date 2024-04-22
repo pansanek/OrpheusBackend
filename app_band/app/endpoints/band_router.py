@@ -38,3 +38,22 @@ def get_band_by_id(id: UUID, band_service: BandService = Depends(BandService)) -
         return band.dict()
     except KeyError:
         raise HTTPException(404, f'Band with id={id} not found')
+
+
+@band_router.put('/{band_id}')
+def update_band(
+        band_id: UUID,
+        band_info: CreateBandRequest,
+        band_service: BandService = Depends(BandService)
+) -> Band:
+    try:
+        updated_band = band_service.update_band(
+            band_id=band_id,
+            name=band_info.name,
+            members=band_info.members,
+            genre=band_info.genre,
+            photo=band_info.photo
+        )
+        return updated_band
+    except KeyError:
+        raise HTTPException(404, f'Band with id={band_id} not found')

@@ -45,3 +45,24 @@ def get_notification_by_id(id: UUID,
         raise HTTPException(404, f'Notification with id={id} not found')
 
 
+@notification_router.put('/{notification_id}')
+def update_notification(
+        notification_id: UUID,
+        notification_info: CreateNotificationRequest,
+        notification_service: NotificationService = Depends(NotificationService)
+) -> Notification:
+    try:
+        updated_notification = notification_service.update_notification(
+            notification_id=notification_id,
+            type=notification_info.type,
+            title=notification_info.title,
+            contentDescription=notification_info.contentDescription,
+            date=notification_info.date,
+            fromUser=notification_info.fromUser,
+            toUser=notification_info.toUser,
+            postItem=notification_info.postItem,
+            bandItem=notification_info.bandItem,
+        )
+        return updated_notification
+    except KeyError:
+        raise HTTPException(404, f'Notification with id={notification_id} not found')

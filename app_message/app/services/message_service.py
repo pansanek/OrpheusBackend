@@ -27,3 +27,11 @@ class MessageService:
         message = Message(id=uuid4(), chat_id=chat_id, from_user=from_user, content=content,
                           timestamp=timestamp)
         return self.message_repo.create_message(message)
+
+    def update_message(self, message_id: UUID, chat_id: UUID,
+                       from_user:dict,
+                       timestamp:str,
+                       content: str) -> Message:
+        message = Message(id=message_id, chat_id=chat_id, from_user=from_user, content=content,
+                          timestamp=timestamp)
+        return self.message_repo.update_message(message)

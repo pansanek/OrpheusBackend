@@ -44,7 +44,28 @@ def get_user_by_id(id: UUID, user_service: UserService = Depends(UserService)) -
     except KeyError:
         raise HTTPException(404, f'User with id={id} not found')
 
-
+@user_router.put('/{user_id}')
+def update_user(
+        user_id: UUID,
+        user_info: CreateUserRequest,
+        user_service: UserService = Depends(UserService)
+) -> User:
+    try:
+        updated_user = user_service.update_user(
+            user_id=user_id,
+            login=user_info.login,
+            name=user_info.name,
+            password=user_info.password,
+            email=user_info.email,
+            about=user_info.about,
+            user_type=user_info.user_type,
+            profile_picture=user_info.profile_picture,
+            background_picture=user_info.background_picture,
+            settings=user_info.settings
+        )
+        return updated_user
+    except KeyError:
+        raise HTTPException(404, f'User with id={user_id} not found')
 @user_router.get('/auth')
 def authorize(login: str, password: str, user_service: UserService = Depends(UserService)) -> str:
     try:

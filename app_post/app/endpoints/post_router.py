@@ -52,3 +52,27 @@ def get_post_by_creator_id(id: UUID, post_service: PostService = Depends(PostSer
         return post.dict()
     except KeyError:
         raise HTTPException(404, f'Post with id={id} not found')
+
+
+@post_router.put('/{post_id}')
+def update_post(
+        post_id: UUID,
+        post_info: CreatePostRequest,
+        post_service: PostService = Depends(PostService)
+) -> Post:
+    try:
+        updated_post = post_service.update_post(
+            post_id=post_id,
+            creatorId=post_info.creatorId,
+            creatorName=post_info.creatorName,
+            creatorPicture=post_info.creatorPicture,
+            text=post_info.text,
+            date=post_info.date,
+            likes=post_info.likes,
+            comments=post_info.comments,
+            attachment=post_info.attachment,
+            creator_type=post_info.creator_type,
+        )
+        return updated_post
+    except KeyError:
+        raise HTTPException(404, f'Post with id={post_id} not found')

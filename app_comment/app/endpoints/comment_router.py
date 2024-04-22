@@ -38,3 +38,23 @@ def get_comment_by_id(id: UUID, comment_service: CommentService = Depends(Commen
         return comment.dict()
     except KeyError:
         raise HTTPException(404, f'Comment with id={id} not found')
+
+
+
+@comment_router.put('/{comment_id}')
+def update_comment(
+        comment_id: UUID,
+        comment_info: CreateCommentRequest,
+        comment_service: CommentService = Depends(CommentService)
+) -> Comment:
+    try:
+        updated_comment = comment_service.update_comment(
+            comment_id=comment_id,
+            user=comment_info.user,
+            post_id=comment_info.post_id,
+            text=comment_info.text,
+            timestamp=comment_info.timestamp
+        )
+        return updated_comment
+    except KeyError:
+        raise HTTPException(404, f'Comment with id={comment_id} not found')

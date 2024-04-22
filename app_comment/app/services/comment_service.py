@@ -23,6 +23,10 @@ class CommentService:
     def get_comments_by_post_id(self, post_id: UUID) -> List[Comment]:
         return self.comment_repo.get_comments_by_post_id(post_id)
 
-    def create_comment(self, post_id: UUID, user: dict, text: str,timestamp:datetime) -> Comment:
+    def create_comment(self, post_id: UUID, user: dict, text: str,timestamp:str) -> Comment:
         comment = Comment(id=uuid4(), post_id=post_id, user=user, text=text, timestamp=timestamp)
         return self.comment_repo.create_comment(comment)
+
+    def update_comment(self, comment_id: UUID, post_id: UUID, user: dict, text: str,timestamp:str) -> Comment:
+        comment = Comment(id=comment_id, post_id=post_id, user=user, text=text, timestamp=timestamp)
+        return self.comment_repo.update_comment(comment)

@@ -38,3 +38,23 @@ def get_location_by_id(id: UUID, location_service: LocationService = Depends(Loc
         return location.dict()
     except KeyError:
         raise HTTPException(404, f'Location with id={id} not found')
+
+
+@location_router.put('/{location_id}')
+def update_location(
+        location_id: UUID,
+        location_info: CreateLocationRequest,
+        location_service: LocationService = Depends(LocationService)
+) -> Location:
+    try:
+        updated_location = location_service.update_location(
+            location_id=location_id,
+            admin=location_info.admin,
+            name=location_info.name,
+            address=location_info.address,
+            about=location_info.about,
+            profile_picture=location_info.profile_picture
+        )
+        return updated_location
+    except KeyError:
+        raise HTTPException(404, f'Location with id={location_id} not found')

@@ -79,3 +79,10 @@ class BandRepo:
             if i.id == id:
                 return i
         raise KeyError
+
+    def update_band(self, band: Band) -> Band:
+        for index, existing_band in enumerate(bands):
+            if existing_band.id == band.id:
+                bands[index] = band
+                return band
+        raise KeyError("Band not found")

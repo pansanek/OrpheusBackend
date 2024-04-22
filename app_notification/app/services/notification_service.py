@@ -38,3 +38,21 @@ class NotificationService:
                                     postItem=postItem,
                                     bandItem=bandItem)
         return self.notification_repo.create_notification(notification)
+
+    def update_notification(self, notification_id: UUID, type=NotificationType,
+                            title=str,
+                            contentDescription=str,
+                            date=str,
+                            fromUser=dict,
+                            toUser=dict,
+                            postItem=dict,
+                            bandItem=dict, ) -> Notification:
+        notification = Notification(id=notification_id, type=type,
+                                    title=title,
+                                    contentDescription=contentDescription,
+                                    date=date,
+                                    fromUser=fromUser,
+                                    toUser=toUser,
+                                    postItem=postItem,
+                                    bandItem=bandItem)
+        return self.notification_repo.update_notification(notification)

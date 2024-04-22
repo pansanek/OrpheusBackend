@@ -40,3 +40,20 @@ def get_message_by_id(id: UUID, message_service: MessageService = Depends(Messag
         raise HTTPException(404, f'message with id={id} not found')
 
 
+@message_router.put('/{message_id}')
+def update_message(
+        message_id: UUID,
+        message_info: CreateMessageRequest,
+        message_service: MessageService = Depends(MessageService)
+) -> Message:
+    try:
+        updated_message = message_service.update_message(
+            message_id=message_id,
+            chat_id=message_info.chat_id,
+            from_user=message_info.from_user,
+            timestamp=message_info.timestamp,
+            content=message_info.content
+        )
+        return updated_message
+    except KeyError:
+        raise HTTPException(404, f'Message with id={message_id} not found')

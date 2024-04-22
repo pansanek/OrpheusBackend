@@ -36,3 +36,20 @@ def get_musician_by_id(id: UUID, musician_service: MusicianService = Depends(Mus
         return musician.dict()
     except KeyError:
         raise HTTPException(404, f'Musician with id={id} not found')
+
+@musician_router.put('/{musician_id}')
+def update_musician(
+        musician_id: UUID,
+        musician_info: CreateMusicianRequest,
+        musician_service: MusicianService = Depends(MusicianService)
+) -> Musician:
+    try:
+        updated_musician = musician_service.update_musician(
+            musician_id=musician_id,
+            user=musician_info.user,
+            genre=musician_info.genre,
+            instrument=musician_info.instrument
+        )
+        return updated_musician
+    except KeyError:
+        raise HTTPException(404, f'Musician with id={musician_id} not found')
