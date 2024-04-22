@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, DateTime, JSON, Enum, Integer
 from sqlalchemy.dialects.postgresql import UUID
 
-from app.schemas.base_schema import Base
+from app_message.app.schemas.base_schema import Base
 
 
 class Message(Base):

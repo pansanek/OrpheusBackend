@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app.database import get_db
-from app.models.message_model import Message
-from app.schemas.message_schema import Message as DBMessage
+from app_message.app.database import get_db
+from app_message.app.models.message_model import Message
+from app_message.app.schemas.message_schema import Message as DBMessage
 
 
 class MessageRepo:

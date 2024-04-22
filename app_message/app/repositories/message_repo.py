@@ -11,6 +11,7 @@ from app_message.app.models.user_settings_model import UserSettings
 messages: list[Message] = [
     Message(
         id=uuid4(),
+        chat_id = uuid4(),
         from_user=dict(User(
             id=uuid4(),
             login="pansanek",
@@ -40,9 +41,9 @@ class MessageRepo:
     def get_messages(self) -> list[Message]:
         return messages
 
-    def create_message(self, messages) -> Message:
-        messages.append(messages)
-        return messages
+    def create_message(self, message) -> Message:
+        messages.append(message)
+        return message
 
     def get_messages_by_id(self, id):
         for i in messages:

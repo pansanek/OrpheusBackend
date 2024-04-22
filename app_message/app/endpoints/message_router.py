@@ -3,26 +3,27 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.message_model import message, CreateMessageRequest
-from app.services.message_service import messageService
+from app_message.app.models.message_model import Message, CreateMessageRequest
+from app_message.app.services.message_service import MessageService
 
 message_router = APIRouter(prefix='/messages', tags=['Messages'])
 
 
 @message_router.get('/')
-def get_messages(message_service: messageService = Depends(messageService)) -> List[message]:
+def get_messages(message_service: MessageService = Depends(MessageService)) -> List[Message]:
     return message_service.get_all_messages()
 
 
 @message_router.post('/')
 def create_message(
         message_info: CreateMessageRequest,
-        message_service: messageService = Depends(messageService)
-) -> message:
+        message_service: MessageService = Depends(MessageService)
+) -> Message:
     try:
         message = message_service.create_message(
-            chat=message_info.chat,
+            chat_id=message_info.chat_id,
             from_user=message_info.from_user,
+            timestamp = message_info.timestamp,
             content = message_info.content
         )
         return message.dict()
@@ -31,7 +32,7 @@ def create_message(
 
 
 @message_router.get('/{id}')
-def get_message_by_id(id: UUID, message_service: messageService = Depends(messageService)) -> message:
+def get_message_by_id(id: UUID, message_service: MessageService = Depends(MessageService)) -> Message:
     try:
         message = message_service.get_message_by_id(id)
         return message.dict()

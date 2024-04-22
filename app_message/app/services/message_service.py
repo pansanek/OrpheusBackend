@@ -4,8 +4,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.message_model import Message, Chat, User
-from app.repositories.message_repo import MessageRepo
+from app_message.app.models.message_model import Message
+from app_message.app.repositories.message_repo import MessageRepo
 
 
 class MessageService:
@@ -20,9 +20,10 @@ class MessageService:
     def get_message_by_id(self, message_id: UUID) -> Message:
         return self.message_repo.get_message_by_id(message_id)
 
-    def create_message(self, chat: Chat,
-                       from_user: User,
+    def create_message(self, chat_id: UUID,
+                       from_user:dict,
+                       timestamp:str,
                        content: str) -> Message:
-        message = Message(id=uuid4(), chat=chat, from_user=from_user, content=content,
-                          timestamp=datetime.utcnow())
+        message = Message(id=uuid4(), chat_id=chat_id, from_user=from_user, content=content,
+                          timestamp=timestamp)
         return self.message_repo.create_message(message)

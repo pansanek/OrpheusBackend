@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app.endpoints.message_router import message_router
+from app_message.app.endpoints.message_router import message_router
 
 app = FastAPI(title='App')
 

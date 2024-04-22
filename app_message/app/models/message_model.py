@@ -12,11 +12,12 @@ class Message(BaseModel):
     id: UUID
     chat_id: UUID
     from_user: dict
-    timestamp: datetime
+    timestamp: str
     content: str
 
 
 class CreateMessageRequest(BaseModel):
     chat_id: UUID
-    from_user: UUID
+    from_user: dict
+    timestamp: str
     content: str
