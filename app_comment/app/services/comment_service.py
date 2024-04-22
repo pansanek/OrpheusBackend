@@ -4,8 +4,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.comment_model import Comment, User
-from app.repositories.comment_repo import CommentRepo
+from app_comment.app.models.comment_model import Comment
+from app_comment.app.repositories.comment_repo import CommentRepo
 
 
 class CommentService:
@@ -23,6 +23,6 @@ class CommentService:
     def get_comments_by_post_id(self, post_id: UUID) -> List[Comment]:
         return self.comment_repo.get_comments_by_post_id(post_id)
 
-    def create_comment(self, post_id: UUID, user: User, text: str,timestamp:datetime) -> Comment:
+    def create_comment(self, post_id: UUID, user: dict, text: str,timestamp:datetime) -> Comment:
         comment = Comment(id=uuid4(), post_id=post_id, user=user, text=text, timestamp=timestamp)
         return self.comment_repo.create_comment(comment)

@@ -12,11 +12,11 @@ class Comment(BaseModel):
     post_id: UUID
     user: dict
     text: str
-    timestamp: datetime
+    timestamp: str
 
 
 class CreateCommentRequest(BaseModel):
     user: dict
     post_id: UUID
     text: str
-    timestamp: datetime
+    timestamp: str

@@ -3,17 +3,13 @@ from uuid import uuid4
 
 from app_comment.app.models.comment_model import Comment
 
-from app_comment.app.models.photo_url_model import PhotoUrl
-from app_comment.app.models.user_model import UserTypes, User
-from app_comment.app.models.user_settings_model import UserSettings
-
 from uuid import uuid4
 
-comments = [
-    {
-        "id": str(uuid4()),
-        "post_id": str(uuid4()),
-        "user": {
+comments: list[Comment] = [
+    Comment(
+        id=str(uuid4()),
+        post_id=str(uuid4()),
+        user={
             "id": str(uuid4()),
             "login": "pansanek",
             "name": "Alex",
@@ -34,9 +30,9 @@ comments = [
                 "can_receive_band_invitations": True
             },
         },
-        "text": "Hello!",
-        "timestamp": "15/2/2024 12:37"
-    }
+        text="Hello!",
+        timestamp="15/2/2024 12:37"
+    )
 ]
 
 
@@ -44,9 +40,9 @@ class CommentRepo:
     def get_comments(self) -> list[Comment]:
         return comments
 
-    def create_comment(self, comments) -> Comment:
-        comments.append(comments)
-        return comments
+    def create_comment(self, comment) -> Comment:
+        comments.append(comment)
+        return comment
 
     def get_comments_by_id(self, id):
         for i in comments:
