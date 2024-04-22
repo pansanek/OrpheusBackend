@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app.endpoints.chat_router import chat_router
+from app_chat.app.endpoints.chat_router import chat_router
 
 app = FastAPI(title='App')
 

@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app.database import get_db
-from app.models.chat_model import Chat
-from app.schemas.chat_schema import Chat as DBChat
+from app_chat.app.database import get_db
+from app_chat.app.models.chat_model import Chat
+from app_chat.app.schemas.chat_schema import Chat as DBChat
 
 
 class ChatRepo:

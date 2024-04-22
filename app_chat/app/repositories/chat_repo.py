@@ -54,7 +54,7 @@ users = [
 chats: list[Chat] = [
     Chat(
         id=uuid4(),
-        user=users,
+        users=users,
         last_message="HELLO",
         picture=dict(PhotoUrl(
             id=uuid4(),
@@ -69,9 +69,9 @@ class ChatRepo:
     def get_chats(self) -> list[Chat]:
         return chats
 
-    def create_chat(self, chats) -> Chat:
-        chats.append(chats)
-        return chats
+    def create_chat(self, chat) -> Chat:
+        chats.append(chat)
+        return chat
 
     def get_chats_by_id(self, id):
         for i in chats:

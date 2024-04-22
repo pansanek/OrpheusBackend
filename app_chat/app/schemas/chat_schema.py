@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, JSON, Enum
 from sqlalchemy.dialects.postgresql import UUID
 
-from app.schemas.base_schema import Base
+from app_chat.app.schemas.base_schema import Base
 
 
 class Chat(Base):

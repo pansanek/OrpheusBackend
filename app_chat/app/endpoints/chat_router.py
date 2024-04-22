@@ -3,26 +3,25 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.chat_model import chat, CreateChatRequest
-from app.services.chat_service import chatService
+from app_chat.app.models.chat_model import Chat, CreateChatRequest
+from app_chat.app.services.chat_service import ChatService
 
 chat_router = APIRouter(prefix='/chats', tags=['Chats'])
 
 
 @chat_router.get('/')
-def get_chats(chat_service: chatService = Depends(chatService)) -> List[chat]:
+def get_chats(chat_service: ChatService = Depends(ChatService)) -> List[Chat]:
     return chat_service.get_all_chats()
 
 
 @chat_router.post('/')
 def create_chat(
         chat_info: CreateChatRequest,
-        chat_service: chatService = Depends(chatService)
-) -> chat:
+        chat_service: ChatService = Depends(ChatService)
+) -> Chat:
     try:
         chat = chat_service.create_chat(
-            creator=chat_info.creator,
-            second_user=chat_info.second_user,
+            users = chat_info.users,
             last_message=chat_info.last_message,
             picture=chat_info.picture,
             name=chat_info.name,
@@ -33,7 +32,7 @@ def create_chat(
 
 
 @chat_router.get('/{id}')
-def get_chat_by_id(id: UUID, chat_service: chatService = Depends(chatService)) -> chat:
+def get_chat_by_id(id: UUID, chat_service: ChatService = Depends(ChatService)) -> Chat:
     try:
         chat = chat_service.get_chat_by_id(id)
         return chat.dict()
@@ -45,8 +44,8 @@ def get_chat_by_id(id: UUID, chat_service: chatService = Depends(chatService)) -
 def update_chat_last_message(
         id: UUID,
         lastMessage: str,
-        chat_service: chatService = Depends(chatService)
-) -> chat:
+        chat_service: ChatService = Depends(ChatService)
+) -> Chat:
     try:
         chat = chat_service.update_chat_last_message(
             id=id,
