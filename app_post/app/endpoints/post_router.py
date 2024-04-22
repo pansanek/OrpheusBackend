@@ -2,9 +2,9 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.models.post_model import CreatePostRequest
-from app.models.post_model import Post
-from app.services.post_service import PostService
+from app_post.app.models.post_model import CreatePostRequest
+from app_post.app.models.post_model import Post
+from app_post.app.services.post_service import PostService
 
 post_router = APIRouter(prefix='/posts', tags=['Posts'])
 
@@ -21,10 +21,11 @@ def create_post(
 ) -> Post:
     try:
         post = post_service.create_post(
-            creator_id=post_info.creator_id,
+            creatorId=post_info.creatorId,
             creatorName=post_info.creatorName,
             creatorPicture=post_info.creatorPicture,
             text=post_info.text,
+            date = post_info.date,
             likes=post_info.likes,
             comments=post_info.comments,
             attachment=post_info.attachment,

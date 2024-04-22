@@ -49,7 +49,7 @@ posts: list[Post] = [
         text="First post",
         date="15/2/2024 12:37",
         likes=[],
-        comments=dict(comments),
+        comments=comments,
         attachment=dict(PhotoUrl(
             id=uuid4(),
             url="https://sun1-88.userapi.com/impg/SsYpAAyxKG2SXIKXfY8iBvf2BTxZH9XYP2PFmA/lSVeMDXQuDM.jpg?size=1435x1435&quality=95&sign=c2dff2cc261588cb4a712c853c116199&type=album"
@@ -63,9 +63,9 @@ class PostRepo:
     def get_posts(self) -> list[Post]:
         return posts
 
-    def create_post(self, posts) -> Post:
-        posts.append(posts)
-        return posts
+    def create_post(self, post) -> Post:
+        posts.append(post)
+        return post
 
     def get_posts_by_id(self, id):
         for i in posts:

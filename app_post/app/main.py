@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app.endpoints.post_router import post_router
+from app_post.app.endpoints.post_router import post_router
 
 app = FastAPI(title='App')
 

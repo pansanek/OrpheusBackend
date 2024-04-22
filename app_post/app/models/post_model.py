@@ -18,7 +18,7 @@ class Post(BaseModel):
     creatorName: str
     creatorPicture: dict
     text: str
-    date: datetime
+    date: str
     likes: List[dict]
     comments: List[dict]
     attachment:dict
@@ -28,10 +28,11 @@ class Post(BaseModel):
 
 
 class CreatePostRequest(BaseModel):
-    creator_id: UUID
+    creatorId: UUID
     creatorName: str
     creatorPicture: dict
     text: str
+    date: str
     likes: List[dict]
     comments: List[dict]
     attachment: dict

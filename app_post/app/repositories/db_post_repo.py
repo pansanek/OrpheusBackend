@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app.models.post_model import Post
-from app.schemas.post_schema import Post as DBPost
-from app.database import get_db
+from app_post.app.models.post_model import Post
+from app_post.app.schemas.post_schema import Post as DBPost
+from app_post.app.database import get_db
 
 
 class PostRepo:
