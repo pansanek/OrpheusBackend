@@ -3,8 +3,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app.models.musician_model import Musician, User
-from app.repositories.db_musician_repo import MusicianRepo
+from app_musician.app.models.musician_model import Musician
+from app_musician.app.repositories.musician_repo import MusicianRepo
 
 
 class MusicianService:
@@ -14,11 +14,9 @@ class MusicianService:
         self.musician_repo = musician_repo
 
     def get_all_musicians(self) -> List[Musician]:
-        return self.musician_repo.get_all_musicians()
+        return self.musician_repo.get_musicians()
 
-    def get_musician_by_id(self, musician_id: UUID) -> Musician:
-        return self.musician_repo.get_musician_by_id(musician_id)
 
-    def create_musician(self, user: User, genre: str, instrument: str) -> Musician:
+    def create_musician(self, user: dict, genre: str, instrument: str) -> Musician:
         musician = Musician(id=uuid4(), user=user, genre=genre, instrument=instrument)
         return self.musician_repo.create_musician(musician)

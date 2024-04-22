@@ -30,10 +30,10 @@ musicians: list[Musician] = [
             )),
             settings=dict(UserSettings(can_receive_messages_for_new_chats=True,
                                   can_receive_band_invitations=True)),
-        ),
+        )),
         genre=GenreTypes.METALCORE,
         instrument=InstrumentTypes.DRUMS
-    ))
+    )
 ]
 
 
@@ -41,9 +41,9 @@ class MusicianRepo:
     def get_musicians(self) -> list[Musician]:
         return musicians
 
-    def create_musician(self, musicians) -> Musician:
-        musicians.append(musicians)
-        return musicians
+    def create_musician(self, musician) -> Musician:
+        musicians.append(musician)
+        return musician
 
     def get_musicians_by_id(self, id):
         for i in musicians:

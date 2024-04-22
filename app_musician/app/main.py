@@ -2,7 +2,7 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app.endpoints.musician_router import musician_router
+from app_musician.app.endpoints.musician_router import musician_router
 
 app = FastAPI(title='App')
 
