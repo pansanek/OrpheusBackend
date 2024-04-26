@@ -1,0 +1,187 @@
+name: CI/CD pipline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-app-band:
+    name: Run app_band tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_band/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_band/tests/unit
+
+  test-app-chat:
+    name: Run app_chat tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_chat/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_chat/tests/unit
+  test-app-comment:
+    name: Run app_comment tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_comment/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_comment/tests/unit
+  test-app-location:
+    name: Run app_location tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_location/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_location/tests/unit
+  test-app-message:
+    name: Run app_message tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_message/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_message/tests/unit
+  test-app-musician:
+    name: Run app_musician tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_musician/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_musician/tests/unit
+  test-app-notification:
+    name: Run app_notification tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_notification/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_notification/tests/unit
+  test-app-post:
+    name: Run app_post tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_post/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_post/tests/unit
+  test-app-user:
+    name: Run app_user tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Prepare unit tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r ./app_user/requirements.txt
+
+      - name: Run unit tests
+        run: |
+          pytest ./app_user/tests/unit
+
+  update-and-deploy:
+    runs-on: ubuntu-latest
+      needs: [ test-app-user,
+               test-app-post,
+               test-app-notification,
+               test-app-musician,
+               test-app-message,
+               test-app-location,
+               test-app-comment,
+               test-app-chat,
+               test-app-band ]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: SSH into VM and Update Repository
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ./OrpheusBackend
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S git pull
+
+      - name: Recreate Docker Containers
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ./OrpheusBackend
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker compose up --build -d
