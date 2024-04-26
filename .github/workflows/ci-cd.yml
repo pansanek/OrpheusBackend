@@ -153,15 +153,7 @@ jobs:
 
   update-and-deploy:
     runs-on: ubuntu-latest
-      needs: [ test-app-user,
-               test-app-post,
-               test-app-notification,
-               test-app-musician,
-               test-app-message,
-               test-app-location,
-               test-app-comment,
-               test-app-chat,
-               test-app-band ]
+      needs: [ test-app-user,test-app-post,test-app-notification,test-app-musician,test-app-message,test-app-location,test-app-comment,test-app-chat,test-app-band ]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
