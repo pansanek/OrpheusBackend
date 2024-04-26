@@ -18,3 +18,6 @@ COPY ./app_user/alembic.ini /app_user/alembic.ini
 EXPOSE 88
 
 CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 88"]
+
+
+
