@@ -1,20 +1,20 @@
 from sqlalchemy import Column, String, Enum, JSON
 from sqlalchemy.dialects.postgresql import UUID
 
+from app_notification.app.models.notification_model import NotificationType
 from app_notification.app.models.user_model import UserTypes
 from app_notification.app.schemas.base_schema import Base
 
 
 class Notification(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'notifications'
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True, nullable=False)
-    login = Column(String, index=True, unique=True, nullable=False)
-    name = Column(String, index=True, unique=True, nullable=False)
-    password = Column(String, nullable=False)
-    email = Column(String, index=True, unique=True, nullable=False)
-    about = Column(String, nullable=True)
-    user_type = Column(Enum(UserTypes), nullable=False)
-    profile_picture = Column(JSON, nullable=True)
-    background_picture = Column(JSON, nullable=True)
-    settings = Column(JSON, nullable=False)
+    type = Column(Enum(NotificationType), index=True, unique=True, nullable=False)
+    title = Column(String, index=True, unique=True, nullable=False)
+    content_description = Column(String, nullable=False)
+    date = Column(String, index=True, unique=True, nullable=False)
+    from_user = Column(JSON, nullable=False)
+    to_user = Column(JSON, nullable=False)
+    post_item = Column(JSON, nullable=True)
+    band_item = Column(JSON, nullable=True)

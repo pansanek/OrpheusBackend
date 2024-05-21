@@ -10,5 +10,5 @@ class Message(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True, nullable=False)
     chat_id = Column(UUID(as_uuid=True), nullable=False)
     from_user = Column(JSON, nullable=False)
-    timestamp = Column(DateTime, nullable=False)
+    timestamp = Column(String, nullable=False)
     content = Column(String, nullable=False)

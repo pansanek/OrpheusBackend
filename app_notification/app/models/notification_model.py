@@ -1,8 +1,7 @@
 from enum import Enum
 from uuid import UUID
 
-from pydantic import BaseModel
-
+from pydantic import BaseModel, ConfigDict
 
 class NotificationType(str, Enum):
     LIKE = "Like"
@@ -10,6 +9,7 @@ class NotificationType(str, Enum):
 
 
 class Notification(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     id: UUID
     type: NotificationType
     title: str

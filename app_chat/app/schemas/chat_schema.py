@@ -10,3 +10,5 @@ class Chat(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True, nullable=False)
     users = Column(JSON, nullable=False)
     last_message = Column(String, nullable=False)
+    picture = Column(JSON, nullable=False)
+    name = Column(String, nullable=False)

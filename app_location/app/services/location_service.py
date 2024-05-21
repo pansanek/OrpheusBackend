@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_location.app.models.location_model import Location
-from app_location.app.repositories.location_repo import LocationRepo
+from app_location.app.repositories.db_location_repo import LocationRepo
 
 
 class LocationService:
@@ -14,7 +14,7 @@ class LocationService:
         self.location_repo = location_repo
 
     def get_all_locations(self) -> List[Location]:
-        return self.location_repo.get_locations()
+        return self.location_repo.get_all_locations()
 
     def get_location_by_id(self, location_id: UUID) -> Location:
         return self.location_repo.get_location_by_id(location_id)

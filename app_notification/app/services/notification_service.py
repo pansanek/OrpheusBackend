@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_notification.app.models.notification_model import Notification
-from app_notification.app.repositories.notification_repo import NotificationRepo
+from app_notification.app.repositories.db_notification_repo import NotificationRepo
 
 from app_notification.app.models.notification_model import NotificationType
 
@@ -16,7 +16,7 @@ class NotificationService:
         self.notification_repo = notification_repo
 
     def get_all_notifications(self) -> List[Notification]:
-        return self.notification_repo.get_notifications()
+        return self.notification_repo.get_all_notifications()
 
     def get_notification_by_id(self, notification_id: UUID) -> Notification:
         return self.notification_repo.get_notification_by_id(notification_id)

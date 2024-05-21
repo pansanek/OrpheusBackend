@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_musician.app.models.musician_model import Musician
-from app_musician.app.repositories.musician_repo import MusicianRepo
+from app_musician.app.repositories.db_musician_repo import MusicianRepo
 
 
 class MusicianService:
@@ -14,7 +14,7 @@ class MusicianService:
         self.musician_repo = musician_repo
 
     def get_all_musicians(self) -> List[Musician]:
-        return self.musician_repo.get_musicians()
+        return self.musician_repo.get_all_musicians()
 
 
     def create_musician(self, user: dict, genre: str, instrument: str) -> Musician:

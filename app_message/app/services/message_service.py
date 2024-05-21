@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_message.app.models.message_model import Message
-from app_message.app.repositories.message_repo import MessageRepo
+from app_message.app.repositories.db_message_repo import MessageRepo
 
 
 class MessageService:
@@ -15,7 +15,7 @@ class MessageService:
         self.message_repo = message_repo
 
     def get_all_messages(self) -> List[Message]:
-        return self.message_repo.get_messages()
+        return self.message_repo.get_all_messages()
 
     def get_message_by_id(self, message_id: UUID) -> Message:
         return self.message_repo.get_message_by_id(message_id)

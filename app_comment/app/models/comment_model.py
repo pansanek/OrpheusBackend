@@ -3,11 +3,12 @@ from enum import Enum
 from typing import List
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 
 class Comment(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     id: UUID
     post_id: UUID
     user: dict

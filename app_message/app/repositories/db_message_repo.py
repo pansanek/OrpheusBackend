@@ -4,7 +4,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_message.app.database import get_db
+from app_message.app.schemas.base_schema import get_db
 from app_message.app.models.message_model import Message
 from app_message.app.schemas.message_schema import Message as DBMessage
 
@@ -58,3 +58,14 @@ class MessageRepo:
             raise KeyError(f"Messages with chat_id {chat_id} not found.")
 
         return [self._map_to_model(message) for message in messages]
+
+    def update_message(self, message: Message) -> Message:
+        try:
+            db_message = self.db.query(DBMessage).filter(DBMessage.id ==message.id).first()
+            db_message = message
+            self.db.commit()
+            return self.db.query(DBMessage).filter(DBMessage.id ==message.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

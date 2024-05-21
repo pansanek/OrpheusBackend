@@ -4,7 +4,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_band.app.database import get_db
+from app_band.app.schemas.base_schema import get_db
 from app_band.app.models.band_model import Band
 from app_band.app.schemas.band_schema import Band as DBBand
 
@@ -50,3 +50,15 @@ class BandRepo:
         if band is None:
             raise KeyError(f"Band with id {band_id} not found.")
         return self._map_to_model(band)
+
+
+    def update_band(self, band: Band) -> Band:
+        try:
+            db_band = self.db.query(DBBand).filter(DBBand.id ==band.id).first()
+            db_band = band
+            self.db.commit()
+            return self.db.query(DBBand).filter(DBBand.id ==band.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

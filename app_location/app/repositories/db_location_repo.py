@@ -4,7 +4,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_location.app.database import get_db
+from app_location.app.schemas.base_schema import get_db
 from app_location.app.models.location_model import Location
 from app_location.app.schemas.location_schema import Location as DBLocation
 
@@ -50,3 +50,14 @@ class LocationRepo:
         if location is None:
             raise KeyError(f"Location with id {location_id} not found.")
         return self._map_to_model(location)
+
+    def update_location(self, location: Location) -> Location:
+        try:
+            db_location = self.db.query(DBLocation).filter(DBLocation.id ==location.id).first()
+            db_location = location
+            self.db.commit()
+            return self.db.query(DBLocation).filter(DBLocation.id ==location.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

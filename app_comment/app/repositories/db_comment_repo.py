@@ -4,9 +4,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app.database import get_db
-from app.models.comment_model import Comment
-from app.schemas.comment_schema import Comment as DBComment
+from app_comment.app.schemas.base_schema import get_db
+from app_comment.app.models.comment_model import Comment
+from app_comment.app.schemas.comment_schema import Comment as DBComment
 
 
 class CommentRepo:
@@ -62,3 +62,14 @@ class CommentRepo:
             return []
 
         return [self._map_to_model(comment) for comment in comments]
+
+    def update_comment(self, comment: Comment) -> Comment:
+        try:
+            db_comment = self.db.query(DBComment).filter(DBComment.id ==comment.id).first()
+            db_comment = comment
+            self.db.commit()
+            return self.db.query(DBComment).filter(DBComment.id ==comment.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

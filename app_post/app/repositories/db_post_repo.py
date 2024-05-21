@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app_post.app.models.post_model import Post
 from app_post.app.schemas.post_schema import Post as DBPost
-from app_post.app.database import get_db
+from app_post.app.schemas.base_schema import get_db
 
 
 class PostRepo:
@@ -58,3 +58,14 @@ class PostRepo:
             raise KeyError(f"Messages with creator_id {creator_id} not found.")
 
         return [self._map_to_model(post) for post in posts]
+
+    def update_post(self, post: Post) -> Post:
+        try:
+            db_post = self.db.query(DBPost).filter(DBPost.id ==post.id).first()
+            db_post = post
+            self.db.commit()
+            return self.db.query(DBPost).filter(DBPost.id ==post.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

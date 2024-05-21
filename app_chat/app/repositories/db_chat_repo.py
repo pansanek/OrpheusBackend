@@ -4,7 +4,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_chat.app.database import get_db
+from app_chat.app.schemas.base_schema import get_db
 from app_chat.app.models.chat_model import Chat
 from app_chat.app.schemas.chat_schema import Chat as DBChat
 
@@ -63,3 +63,14 @@ class ChatRepo:
         except:
             traceback.print_exc()
             raise KeyError
+
+    def update_chat(self, chat: Chat) -> Chat:
+        try:
+            db_chat = self.db.query(DBChat).filter(DBChat.id ==chat.id).first()
+            db_chat = chat
+            self.db.commit()
+            return self.db.query(DBChat).filter(DBChat.id ==chat.id).first()
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e

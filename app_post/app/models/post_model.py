@@ -3,7 +3,7 @@ from enum import Enum
 from typing import List
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class CreatorTypes(str, Enum):
@@ -13,6 +13,7 @@ class CreatorTypes(str, Enum):
 
 
 class Post(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     post_id: UUID
     creatorId: UUID
     creatorName: str

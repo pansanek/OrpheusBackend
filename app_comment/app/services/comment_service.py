@@ -5,7 +5,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_comment.app.models.comment_model import Comment
-from app_comment.app.repositories.comment_repo import CommentRepo
+from app_comment.app.repositories.db_comment_repo import CommentRepo
 
 
 class CommentService:
@@ -15,7 +15,7 @@ class CommentService:
         self.comment_repo = comment_repo
 
     def get_all_comments(self) -> List[Comment]:
-        return self.comment_repo.get_comments()
+        return self.comment_repo.get_all_comments()
 
     def get_comment_by_id(self, comment_id: UUID) -> Comment:
         return self.comment_repo.get_comment_by_id(comment_id)
