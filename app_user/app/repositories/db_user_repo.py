@@ -4,13 +4,14 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_user.app.database import get_db
+from app_user.app.schemas.base_schema import get_db
 from app_user.app.models.user_model import User
 from app_user.app.schemas.user_schema import User as DBUser
 
 
 class UserRepo:
     db: Session
+
 
     def __init__(self) -> None:
         self.db = next(get_db())
@@ -30,6 +31,17 @@ class UserRepo:
             self.db.add(db_user)
             self.db.commit()
             return self._map_to_model(db_user)
+        except Exception as e:
+            traceback.print_exc()
+            self.db.rollback()
+            raise e
+
+    def update_user(self, user: User) -> User:
+        try:
+            db_user = self.db.query(DBUser).filter(DBUser.id ==user.id).first()
+            db_user = user
+            self.db.commit()
+            return self.db.query(DBUser).filter(DBUser.id ==user.id).first()
         except Exception as e:
             traceback.print_exc()
             self.db.rollback()

@@ -1,7 +1,7 @@
 from enum import Enum
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class UserTypes(str, Enum):
@@ -10,6 +10,7 @@ class UserTypes(str, Enum):
 
 
 class User(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     id: UUID
     login: str
     name: str

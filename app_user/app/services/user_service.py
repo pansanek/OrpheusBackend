@@ -4,7 +4,7 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 
 from app_user.app.models.user_model import User
-from app_user.app.repositories.user_repo import UserRepo
+from app_user.app.repositories.db_user_repo import UserRepo
 
 
 class UserService:
@@ -14,7 +14,7 @@ class UserService:
         self.user_repo = user_repo
 
     def get_all_users(self) -> List[User]:
-        return self.user_repo.get_users()
+        return self.user_repo.get_all_users()
 
 
     def create_user(self, login: str, name: str, password: str, email: str, about: str, user_type: str,
