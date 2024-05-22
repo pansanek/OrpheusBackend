@@ -11,10 +11,6 @@ RUN pip install --no-cache-dir --upgrade -r /app_location/requirements.txt
 COPY ./app_location/app /app_location/app
 COPY .env /app_location
 
-# Копирование файлов alembic
-COPY ./app_location/migration /app_location/migration
-COPY ./app_location/alembic.ini /app_location/alembic.ini
+EXPOSE 83
 
-EXPOSE 85
-
-CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 85"]
+CMD ["/bin/sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 83"]

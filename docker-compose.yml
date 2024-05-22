@@ -26,82 +26,93 @@ services:
     networks:
       - app
 
-#  app_post:
-#    build:
-#      context: .
-#      dockerfile: /app_post/Dockerfile
-#    ports:
-#      - "87:87"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
-#
-#  app_musician:
-#    build:
-#      context: .
-#      dockerfile: /app_musician/Dockerfile
-#    ports:
-#      - "86:86"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
-#
-#  app_location:
-#    build:
-#      context: .
-#      dockerfile: /app_location/Dockerfile
-#    ports:
-#      - "85:85"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
-#
-#  app_comment:
-#    build:
-#      context: .
-#      dockerfile: /app_comment/Dockerfile
-#    ports:
-#      - "84:84"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
-#
-#  app_band:
-#    build:
-#      context: .
-#      dockerfile: /app_band/Dockerfile
-#    ports:
-#      - "83:83"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
-#
-#  app_administrator:
-#    build:
-#      context: .
-#      dockerfile: /app_administrator/Dockerfile
-#    ports:
-#      - "80:80"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
+  app_post:
+    build:
+      context: .
+      dockerfile: /app_post/Dockerfile
+    ports:
+      - "87:87"
+    depends_on:
+      - postgres
+    networks:
+      - app
 
-#  app_chat:
-#    build:
-#      context: .
-#      dockerfile: /app_chat/Dockerfile
-#    ports:
-#      - "82:82"
-#    depends_on:
-#      - postgres
-#    networks:
-#      - app
+  app_notification:
+    build:
+      context: .
+      dockerfile: /app_notification/Dockerfile
+    ports:
+      - "86:86"
+    depends_on:
+      - postgres
+    networks:
+      - app
+
+  app_musician:
+    build:
+      context: .
+      dockerfile: /app_musician/Dockerfile
+    ports:
+      - "85:85"
+    depends_on:
+      - postgres
+    networks:
+      - app
+
+  app_message:
+    build:
+      context: .
+      dockerfile: /app_message/Dockerfile
+    ports:
+      - "84:84"
+    depends_on:
+      - postgres
+    networks:
+      - app
+      -
+  app_location:
+    build:
+      context: .
+      dockerfile: /app_location/Dockerfile
+    ports:
+      - "83:83"
+    depends_on:
+      - postgres
+    networks:
+      - app
+
+  app_comment:
+    build:
+      context: .
+      dockerfile: /app_comment/Dockerfile
+    ports:
+      - "82:82"
+    depends_on:
+      - postgres
+    networks:
+      - app
+
+  app_chat:
+    build:
+      context: .
+      dockerfile: /app_chat/Dockerfile
+    ports:
+      - "81:81"
+    depends_on:
+      - postgres
+    networks:
+      - app
+
+  app_band:
+    build:
+      context: .
+      dockerfile: /app_band/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    networks:
+      - app
 
   pgadmin:
     container_name: pgadmin
@@ -111,45 +122,25 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "5050:80"
-#  gateway:
-#    build:
-#      context: ./
-#      dockerfile: ./gateway/Dockerfile
-#    ports:
-#      - "8000:8000"
-#    # depends_on:
-#    # - postgres-cart
-#    # - rabbitmq
-#    labels:
-#      logging: "promtail"
-#      logging_jobname: "containerlogs"
-#    networks:
-#      - app
 
-###########################
-  ############################
-  ##############################
-#  keycloak:
-#    image: quay.io/keycloak/keycloak:23.0.1
-#    volumes:
-#      - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      - KEYCLOAK_ADMIN=admin
-#      - KEYCLOAK_ADMIN_PASSWORD=admin
-#    command:
-#      - "start-dev"
-#      - "-Dkeycloak.profile.feature.upload_scripts=enabled"
-#      - "-Dkeycloak.migration.action=import"
-#      - "-Dkeycloak.migration.provider=singleFile"
-#      - "-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/realm-export.json"
-#    networks:
-#      - app
+  minio:
+    image: quay.io/minio/minio
+    command: server /data --console-address ":9090"
+    restart: always
+    ports:
+      - 9000:9000
+      - 9090:9090
+    volumes:
+      - ~/minio/data:/data
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=1234
+    networks:
+      - minio_net
+
 
 networks:
+  minio_net:
   app:
-    name: app
-
 volumes:
   postgres_data:

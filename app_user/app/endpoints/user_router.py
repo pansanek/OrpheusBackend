@@ -1,13 +1,26 @@
+import os
+import datetime
+import jwt
+from typing import Annotated
+
+from dateutil.relativedelta import relativedelta
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,UploadFile, File, Form
 
+from MinioHandler import MinioHandler
 from app_user.app.models.user_model import CreateUserRequest
 from app_user.app.models.user_model import User
 from app_user.app.services.user_service import UserService
 
 user_router = APIRouter(prefix='/users', tags=['Users'])
-
+minio_handler = MinioHandler(
+    os.getenv('MINIO_URL'),
+    os.getenv('MINIO_ACCESS_KEY'),
+    os.getenv('MINIO_SECRET_KEY'),
+    os.getenv('MINIO_BUCKET'),
+    False
+)
 
 @user_router.get('/')
 def get_users(user_service: UserService = Depends(UserService)) -> list[User]:
@@ -66,10 +79,31 @@ def update_user(
         return updated_user
     except KeyError:
         raise HTTPException(404, f'User with id={user_id} not found')
-@user_router.get('/auth')
-def authorize(login: str, password: str, user_service: UserService = Depends(UserService)) -> str:
-    try:
-        response = user_service.authorize(login,password)
-        return response
-    except KeyError:
-        raise HTTPException(404, f'User with id={id} not found')
+
+
+@user_router.post('/upload')
+async def upload(file: Annotated[UploadFile, Form()]):
+    minio_handler.upload_file(file.filename, file.file, file.size)
+    return {
+        "status": "uploaded",
+        "name": file.filename
+    }
+
+
+@user_router.get('/list')
+async def list_files():
+    return minio_handler.list()
+
+
+@user_router.get('/link/{file}')
+async def link(file: str):
+    obj = minio_handler.stats(file)
+    payload = {
+        "filename": obj.object_name,
+        "valid_til": str(datetime.datetime.utcnow() + relativedelta(minutes=int(os.getenv('LINK_VALID_MINUTES', 10))))
+    }
+    encoded_jwt = jwt.encode(payload, os.getenv('JWT_SECRET'), algorithm="HS256")
+
+    return {
+        "link": f"/download/{encoded_jwt}"
+    }
