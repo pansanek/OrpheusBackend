@@ -1,5 +1,7 @@
 import os
 import datetime
+from io import BytesIO
+
 import jwt
 from typing import Annotated
 
@@ -8,19 +10,13 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException,UploadFile, File, Form
 
-from MinioHandler import MinioHandler
+from MinioHandler import MinioHandler, UploadFileResponse, CustomException
 from app_user.app.models.user_model import CreateUserRequest
 from app_user.app.models.user_model import User
 from app_user.app.services.user_service import UserService
 
 user_router = APIRouter(prefix='/users', tags=['Users'])
-minio_handler = MinioHandler(
-    os.getenv('MINIO_URL'),
-    os.getenv('MINIO_ACCESS_KEY'),
-    os.getenv('MINIO_SECRET_KEY'),
-    os.getenv('MINIO_BUCKET'),
-    False
-)
+
 
 @user_router.get('/')
 def get_users(user_service: UserService = Depends(UserService)) -> list[User]:
@@ -83,7 +79,7 @@ def update_user(
 
 @user_router.post('/upload')
 async def upload(file: Annotated[UploadFile, Form()]):
-    minio_handler.upload_file(file.filename, file.file, file.size)
+    MinioHandler().get_instance().upload_file(file.filename, file.file, file.size)
     return {
         "status": "uploaded",
         "name": file.filename
@@ -92,12 +88,12 @@ async def upload(file: Annotated[UploadFile, Form()]):
 
 @user_router.get('/list')
 async def list_files():
-    return minio_handler.list()
+    return MinioHandler().get_instance().list()
 
 
 @user_router.get('/link/{file}')
 async def link(file: str):
-    obj = minio_handler.stats(file)
+    obj = MinioHandler().get_instance().stats(file)
     payload = {
         "filename": obj.object_name,
         "valid_til": str(datetime.datetime.utcnow() + relativedelta(minutes=int(os.getenv('LINK_VALID_MINUTES', 10))))
@@ -107,3 +103,28 @@ async def link(file: str):
     return {
         "link": f"/download/{encoded_jwt}"
     }
+
+
+
+
+
+
+@user_router.post("/upload/minio", response_model=UploadFileResponse)
+async def upload_file_to_minio(file: UploadFile = File(...)):
+    try:
+        data = file.file.read()
+
+        file_name = " ".join(file.filename.strip().split())
+
+        data_file = MinioHandler().get_instance().put_object(
+            file_name=file_name,
+            file_data=BytesIO(data),
+            content_type=file.content_type
+        )
+        return data_file
+    except CustomException as e:
+        raise e
+    except Exception as e:
+        if e.__class__.__name__ == 'MaxRetryError':
+            raise CustomException(http_code=400, code='400', message='Can not connect to Minio')
+        raise CustomException(code='999', message='Server Error')

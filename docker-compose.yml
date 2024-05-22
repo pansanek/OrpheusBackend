@@ -69,7 +69,7 @@ services:
       - postgres
     networks:
       - app
-      -
+
   app_location:
     build:
       context: .
@@ -134,7 +134,7 @@ services:
       - ~/minio/data:/data
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=1234
+      - MINIO_ROOT_PASSWORD=12341234
     networks:
       - minio_net
 
